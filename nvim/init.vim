@@ -51,8 +51,8 @@ set mouse=""
 
 " NOTE: I stopped highlighting cursor position because it makes redrawing
 " super slow.
-" set cursorline
-" set cursorcolumn
+set cursorline
+set cursorcolumn
 
 " Highlight search results
 set hlsearch
@@ -510,13 +510,12 @@ nnoremap <leader><Left> :tabprev<cr>
 nnoremap <leader><Right> :tabnext<cr>
 """ End Navigation ==================
 
-""" Cursor
-set cursorline
-set cursorcolumn
+" Moving lines up and down
+" Based on this: http://vim.wikia.com/wiki/Moving_lines_up_or_dow
+nnoremap <C-n> :m .+1<CR>==
+nnoremap <C-r> :m .-2<CR>==
+inoremap <C-n> <Esc>:m .+1<CR>==gi
+inoremap <C-r> <Esc>:m .-2<CR>==gi
+vnoremap <C-n> :m '>+1<CR>gv=gv
+vnoremap <C-r> :m '<-2<CR>gv=gv
 
-nnoremap <A-Up> :m .+1<CR>==
-nnoremap <A-Down> :m .-2<CR>==
-inoremap <A-Up> <Esc>:m .+1<CR>==gi
-inoremap <A-Down> <Esc>:m .-2<CR>==gi
-vnoremap <A-Up> :m '>+1<CR>gv=gv
-vnoremap <A-Down> :m '<-2<CR>gv=gv
