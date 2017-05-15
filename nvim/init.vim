@@ -512,10 +512,10 @@ nnoremap <leader><Right> :tabnext<cr>
 
 " Moving lines up and down
 " Based on this: http://vim.wikia.com/wiki/Moving_lines_up_or_dow
-nnoremap <C-n> :m .+1<CR>==
-nnoremap <C-r> :m .-2<CR>==
-inoremap <C-n> <Esc>:m .+1<CR>==gi
-inoremap <C-r> <Esc>:m .-2<CR>==gi
-vnoremap <C-n> :m '>+1<CR>gv=gv
-vnoremap <C-r> :m '<-2<CR>gv=gv
+nnoremap <C-c> :m .+1<CR>==
+nnoremap <C-l> :m .-2<CR>==
+inoremap <C-c> <Esc>:m .+1<CR>==gi
+inoremap <C-l> <Esc>:m .-2<CR>==gi
+vnoremap <C-c> :m '>+1<CR>gv=gv
+vnoremap <C-l> :m '<-2<CR>gv=gv
 
