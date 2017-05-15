@@ -43,7 +43,7 @@ let g:maplocalleader='\\'
 
 """ omni #omni
 " enable omni syntax completion
-set omnifunc=syntaxcomplete#Complete
+"set omnifunc=syntaxcomplete#Complete
 
 """ UI Basics #ui-basics
 " turn off mouse
@@ -88,9 +88,8 @@ call plug#begin()
 
 """ Filetypes #filetypes
 " Polyglot loads language support on demand!
-Plug 'sheerun/vim-polyglot'
-  let g:polyglot_disabled = ['elm']
-
+"Plug 'sheerun/vim-polyglot'
+ " let g:polyglot_disabled = ['elm']
 " HTML / JS / CSS
 Plug 'othree/html5.vim'
 Plug 'vim-scripts/html-improved-indentation'
@@ -99,32 +98,46 @@ Plug 'flowtype/vim-flow'
 Plug 'wokalski/autocomplete-flow'
 Plug 'mattn/emmet-vim'
 " For func argument completion
+Plug 'Shougo/neocomplete.vim'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
+  imap <C-s> <Plug>(neosnippet_expand_or_jump)
+  smap <C-s> <Plug>(neosnippet_expand_or_jump)
+  xmap <C-s> <Plug>(neosnippet_expand_target)
+
+  " SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 " Elixir
 Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
 """ Add support for ANSI colors - this has variously been necessary and caused
 """ problems, no clue what's up there...
-  Plug 'powerman/vim-plugin-AnsiEsc'
+"  Plug 'powerman/vim-plugin-AnsiEsc'
 
 " Phoenix
-Plug 'c-brenn/phoenix.vim'
-Plug 'tpope/vim-projectionist' " required for some navigation features
+"Plug 'c-brenn/phoenix.vim'
+"Plug 'tpope/vim-projectionist' " required for some navigation features
 
 " Elm
-Plug 'ElmCast/elm-vim'
-  let g:elm_format_autosave = 1
-  let g:elm_detailed_complete = 1
-  let g:elm_syntastic_show_warnings = 1
-  let g:elm_format_fail_silently = 1
-  let g:elm_browser_command = 'open'
-  let g:elm_make_show_warnings = 1
-  let g:elm_setup_keybindings = 1
+"Plug 'ElmCast/elm-vim'
+"  let g:elm_format_autosave = 1
+"  let g:elm_detailed_complete = 1
+"  let g:elm_syntastic_show_warnings = 1
+"  let g:elm_format_fail_silently = 1
+"  let g:elm_browser_command = 'open'
+"  let g:elm_make_show_warnings = 1
+"  let g:elm_setup_keybindings = 1
 
 " Fuse
-Plug 'BeeWarloc/vim-fuse'
+"Plug 'BeeWarloc/vim-fuse'
 
 " Markdown
 function! NpmInstallAndUpdateRemotePlugins(info)
@@ -138,49 +151,51 @@ Plug 'vimlab/mdown.vim', { 'do': function('NpmInstallAndUpdateRemotePlugins') }
 Plug 'bogado/file-line'
 
 " Easily toggle quickfix and locations lists with <leader>l and <leader>q
-Plug 'milkypostman/vim-togglelist'
+"Plug 'milkypostman/vim-togglelist'
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   let g:deoplete#enable_at_startup = 1
-  let g:deoplete#sources = {}
-  let g:deoplete#sources._ = ['file', 'neosnippet']
-  let g:deoplete#omni#functions = {}
-  let g:deoplete#omni#input_patterns = {}
+  " use tab for completion
+  "inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+  "let g:deoplete#sources = {}
+  "let g:deoplete#sources._ = ['file', 'neosnippet']
+  "let g:deoplete#omni#functions = {}
+  "let g:deoplete#omni#input_patterns = {}
 
   " Elm support
   " h/t https://github.com/ElmCast/elm-vim/issues/52#issuecomment-264161975
-  let g:deoplete#sources.elm = ['omni'] + g:deoplete#sources._
-  let g:deoplete#omni#functions.elm = ['elm#Complete']
-  let g:deoplete#omni#input_patterns.elm = '[^ \t]+'
-  let g:deoplete#disable_auto_complete = 1
+  "let g:deoplete#sources.elm = ['omni'] + g:deoplete#sources._
+  "let g:deoplete#omni#functions.elm = ['elm#Complete']
+  "let g:deoplete#omni#input_patterns.elm = '[^ \t]+'
+  "let g:deoplete#disable_auto_complete = 1
 
-Plug 'ervandew/supertab'
+  "Plug 'ervandew/supertab'
 
 " Add comment textobjects (I really want to reformat comments without affecting
 " the next line of code)
-Plug 'kana/vim-textobj-user' | Plug 'glts/vim-textobj-comment'
+"Plug 'kana/vim-textobj-user' | Plug 'glts/vim-textobj-comment'
   " Example: Reformat a comment with `gqac` (ac is "a comment")
 
 " EditorConfig support
-Plug 'editorconfig/editorconfig-vim'
+"Plug 'editorconfig/editorconfig-vim'
 
 " Jump between quicklist, location (syntastic, etc) items with ease, among other things
-Plug 'tpope/vim-unimpaired'
+"Plug 'tpope/vim-unimpaired'
 
 " Line commenting
 Plug 'tomtom/tcomment_vim'
   " By default, `gc` will toggle comments
 
-Plug 'janko-m/vim-test'                " Run tests with varying granularity
-  nmap <silent> <leader>t :TestNearest<CR>
-  nmap <silent> <leader>T :TestFile<CR>
-  nmap <silent> <leader>a :TestSuite<CR>
-  nmap <silent> <leader>l :TestLast<CR>
-  nmap <silent> <leader>g :TestVisit<CR>
+"Plug 'janko-m/vim-test'                " Run tests with varying granularity
+"  nmap <silent> <leader>t :TestNearest<CR>
+"  nmap <silent> <leader>T :TestFile<CR>
+"  nmap <silent> <leader>a :TestSuite<CR>
+"  nmap <silent> <leader>l :TestLast<CR>
+"  nmap <silent> <leader>g :TestVisit<CR>
   " run tests in neoterm
-  let g:test#strategy = 'neoterm'
+"  let g:test#strategy = 'neoterm'
   " I use spinach, not cucumber!
-  let g:test#ruby#cucumber#executable = 'spinach'
+"  let g:test#ruby#cucumber#executable = 'spinach'
 
 " Asynchronous file linter
 Plug 'w0rp/ale'
@@ -198,7 +213,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 
 " vim interface to web apis.  Required for gist-vim
-Plug 'mattn/webapi-vim'
+"Plug 'mattn/webapi-vim'
 
 " create gists trivially from buffer, selection, etc.
 Plug 'mattn/gist-vim'
@@ -214,24 +229,24 @@ Plug 'sjl/gundo.vim'
   nnoremap <F5> :GundoToggle<CR>
 
 " org-mode
-Plug 'jceb/vim-orgmode'
-  let g:org_agenda_files = ['~/org/index.org']
-  let g:org_export_emacs = '/usr/local/bin/emacs'
-  let g:org_export_verbose = 1
+"Plug 'jceb/vim-orgmode'
+"  let g:org_agenda_files = ['~/org/index.org']
+"  let g:org_export_emacs = '/usr/local/bin/emacs'
+"  let g:org_export_verbose = 1
 
 " universal text linking
-Plug 'vim-scripts/utl.vim'
+"Plug 'vim-scripts/utl.vim'
 
 " allow portions of a file to use different syntax
-Plug 'vim-scripts/SyntaxRange'
+"Plug 'vim-scripts/SyntaxRange'
 
 " increment dates like other items
-Plug 'tpope/vim-speeddating'
+"Plug 'tpope/vim-speeddating'
 
 " calendar application
-Plug 'itchyny/calendar.vim'
-  let g:calendar_google_calendar = 1
-  let g:calendar_google_task = 1
+"Plug 'itchyny/calendar.vim'
+"  let g:calendar_google_calendar = 1
+"  let g:calendar_google_task = 1
 
 " nicer api for neovim terminal
 Plug 'kassio/neoterm'
