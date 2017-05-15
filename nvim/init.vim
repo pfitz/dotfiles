@@ -97,6 +97,7 @@ Plug 'vim-scripts/html-improved-indentation'
 Plug 'pangloss/vim-javascript'
 Plug 'flowtype/vim-flow'
 Plug 'wokalski/autocomplete-flow'
+Plug 'mattn/emmet-vim'
 " For func argument completion
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
