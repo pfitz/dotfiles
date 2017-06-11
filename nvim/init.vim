@@ -520,6 +520,9 @@ nnoremap <C-Right> <C-w>l
 "nnoremap <silent> <BS> <C-w>h
   " Have to add this because hyperterm sends backspace for C-h
 
+
+" Go to last edited buffer with tab in normal mode
+nmap <tab> :b#<cr>
 " Navigate tabs with leader+h,l
 " It's hard to hit space and h/l simultaneously so increase the timeout for
 " space
