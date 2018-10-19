@@ -115,6 +115,9 @@ imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
+
+" go
+Plug 'fatih/vim-go'
 " Elixir
 Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
