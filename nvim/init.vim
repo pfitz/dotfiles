@@ -115,8 +115,7 @@ imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
-
-" go
+" Go
 Plug 'fatih/vim-go'
 " Elixir
 Plug 'elixir-lang/vim-elixir'
@@ -126,8 +125,8 @@ Plug 'slashmili/alchemist.vim'
 "  Plug 'powerman/vim-plugin-AnsiEsc'
 
 " Phoenix
-"Plug 'c-brenn/phoenix.vim'
-"Plug 'tpope/vim-projectionist' " required for some navigation features
+Plug 'c-brenn/phoenix.vim'
+Plug 'tpope/vim-projectionist' " required for some navigation features
 
 " Elm
 "Plug 'ElmCast/elm-vim'
@@ -177,7 +176,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Add comment textobjects (I really want to reformat comments without affecting
 " the next line of code)
-"Plug 'kana/vim-textobj-user' | Plug 'glts/vim-textobj-comment'
+Plug 'kana/vim-textobj-user' | Plug 'glts/vim-textobj-comment'
   " Example: Reformat a comment with `gqac` (ac is "a comment")
 
 " EditorConfig support
@@ -267,9 +266,10 @@ Plug 'lifepillar/vim-solarized8'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'tomasiser/vim-code-dark'
   "let g:airline_theme = 'luna'
   "let g:airline_theme = 'lucius'
-  let g:airline_theme = 'solarized'
+  let g:airline_theme = 'codedark'
   let g:bufferline_echo = 0
   let g:airline_powerline_fonts=0
   let g:airline_enable_branch=1
@@ -370,7 +370,7 @@ syntax enable
 "let ayucolor="mirage" " for mirage version of theme
 " let ayucolor="dark"   " for dark version of theme
 " colorscheme ayu
-colorscheme solarized8_light_flat
+"colorscheme solarized8_light_flat
 "colorscheme solarized8_dark_flat
 
 """ Keyboard
