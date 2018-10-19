@@ -120,6 +120,8 @@ Plug 'fatih/vim-go'
 " Elixir
 Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
+Plug 'mhinz/vim-mix-format'
+" let g:mix_format_on_save = 1
 """ Add support for ANSI colors - this has variously been necessary and caused
 """ problems, no clue what's up there...
 "  Plug 'powerman/vim-plugin-AnsiEsc'
