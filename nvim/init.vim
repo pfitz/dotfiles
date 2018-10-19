@@ -152,6 +152,7 @@ Plug 'vimlab/mdown.vim', { 'do': function('NpmInstallAndUpdateRemotePlugins') }
 
 """ Utilities #utilities
 Plug 'bogado/file-line'
+Plug 'mileszs/ack.vim'
 
 " Easily toggle quickfix and locations lists with <leader>l and <leader>q
 "Plug 'milkypostman/vim-togglelist'
