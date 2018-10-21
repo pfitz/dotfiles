@@ -40,7 +40,9 @@ set backupcopy=yes
 let g:mapleader=' '
 " Double backslash for local leader
 let g:maplocalleader='\\'
-
+"" Tap completion
+set wildmenu
+set wildmode=full
 """ omni #omni
 " enable omni syntax completion
 "set omnifunc=syntaxcomplete#Complete
@@ -156,12 +158,12 @@ Plug 'bogado/file-line'
 Plug 'mileszs/ack.vim'
 
 " Easily toggle quickfix and locations lists with <leader>l and <leader>q
-"Plug 'milkypostman/vim-togglelist'
+Plug 'milkypostman/vim-togglelist'
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   let g:deoplete#enable_at_startup = 1
   " use tab for completion
-  "inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+  inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
   "let g:deoplete#sources = {}
   "let g:deoplete#sources._ = ['file', 'neosnippet']
   "let g:deoplete#omni#functions = {}
@@ -169,10 +171,10 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
   " Elm support
   " h/t https://github.com/ElmCast/elm-vim/issues/52#issuecomment-264161975
-  "let g:deoplete#sources.elm = ['omni'] + g:deoplete#sources._
-  "let g:deoplete#omni#functions.elm = ['elm#Complete']
-  "let g:deoplete#omni#input_patterns.elm = '[^ \t]+'
-  "let g:deoplete#disable_auto_complete = 1
+  " let g:deoplete#sources.elm = ['omni'] + g:deoplete#sources._
+  " let g:deoplete#omni#functions.elm = ['elm#Complete']
+  " let g:deoplete#omni#input_patterns.elm = '[^ \t]+'
+  " let g:deoplete#disable_auto_complete = 1
 
   "Plug 'ervandew/supertab'
 
@@ -213,6 +215,8 @@ Plug 'w0rp/ale'
 
 " git support from dat tpope
 Plug 'tpope/vim-fugitive'
+
+Plug 'airblade/vim-gitgutter'
 
 " github support from dat tpope
 Plug 'tpope/vim-rhubarb'
@@ -348,6 +352,9 @@ Plug 'tpope/vim-vinegar'
 " NOTE: I don't get highlighting with this and it's hard to see where the
 " selection is
 
+" Dash
+Plug 'rizzatti/dash.vim'
+:nmap <silent> <leader>d <Plug>DashSearch
 call plug#end()
 
 "" Plugin configuration that has to run after plug#end
