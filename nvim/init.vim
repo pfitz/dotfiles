@@ -273,9 +273,10 @@ Plug 'lifepillar/vim-solarized8'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tomasiser/vim-code-dark'
+Plug 'rakr/vim-one'
   "let g:airline_theme = 'luna'
   "let g:airline_theme = 'lucius'
-  let g:airline_theme = 'codedark'
+  let g:airline_theme = 'one'
   let g:bufferline_echo = 0
   let g:airline_powerline_fonts=0
   let g:airline_enable_branch=1
