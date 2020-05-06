@@ -121,8 +121,9 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 Plug 'fatih/vim-go'
 " Elixir
 Plug 'elixir-lang/vim-elixir'
-Plug 'slashmili/alchemist.vim'
-Plug 'mhinz/vim-mix-format'
+"Plug 'slashmili/alchemist.vim'
+"Plug 'mhinz/vim-mix-format'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " let g:mix_format_on_save = 1
 """ Add support for ANSI colors - this has variously been necessary and caused
 """ problems, no clue what's up there...
@@ -160,10 +161,10 @@ Plug 'mileszs/ack.vim'
 " Easily toggle quickfix and locations lists with <leader>l and <leader>q
 Plug 'milkypostman/vim-togglelist'
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  let g:deoplete#enable_at_startup = 1
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+ " let g:deoplete#enable_at_startup = 1
   " use tab for completion
-  inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+  "inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
   "let g:deoplete#sources = {}
   "let g:deoplete#sources._ = ['file', 'neosnippet']
   "let g:deoplete#omni#functions = {}
@@ -355,6 +356,8 @@ Plug 'tpope/vim-vinegar'
 
 " Dash
 Plug 'rizzatti/dash.vim'
+" Tim Popes vim-surround
+Plug 'tpope/vim-surround'
 :nmap <silent> <leader>d <Plug>DashSearch
 call plug#end()
 
@@ -552,3 +555,5 @@ inoremap <C-l> <Esc>:m .-2<CR>==gi
 vnoremap <C-c> :m '>+1<CR>gv=gv
 vnoremap <C-l> :m '<-2<CR>gv=gv
 
+" Activate the matchit plugin
+runtime macros/matchit
