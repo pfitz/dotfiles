@@ -122,9 +122,9 @@ Plug 'fatih/vim-go'
 " Elixir
 Plug 'elixir-lang/vim-elixir'
 "Plug 'slashmili/alchemist.vim'
-"Plug 'mhinz/vim-mix-format'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" let g:mix_format_on_save = 1
+Plug 'mhinz/vim-mix-format'
+  let g:mix_format_on_save = 1
 """ Add support for ANSI colors - this has variously been necessary and caused
 """ problems, no clue what's up there...
 "  Plug 'powerman/vim-plugin-AnsiEsc'
@@ -133,6 +133,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'c-brenn/phoenix.vim'
 Plug 'tpope/vim-projectionist' " required for some navigation features
 
+" Database
+Plug 'tpope/vim-dadbod'
 " Elm
 "Plug 'ElmCast/elm-vim'
 "  let g:elm_format_autosave = 1
@@ -307,6 +309,22 @@ Plug 'junegunn/fzf.vim'
 " Open files where you last left them
 Plug 'dietsche/vim-lastplace'
 
+" motions with jumpmarks
+Plug 'easymotion/vim-easymotion'
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
 " Execute code checks, find mistakes, in the background
 " Plug 'neomake/neomake'
 "   " Run Neomake when I save any buffer
