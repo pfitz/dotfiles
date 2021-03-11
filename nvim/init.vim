@@ -70,7 +70,7 @@ set smartcase
 set title
 
 " Line numbering
-set number
+set relativenumber
 
 """ Undo #undo
 " undofile - This allows you to use undos after exiting and restarting
