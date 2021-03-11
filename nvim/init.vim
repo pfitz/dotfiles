@@ -1,4 +1,5 @@
 scriptencoding utf-8
+set encoding=UTF-8
 " Josh's vim configuration (http://github.com/knewter/dotfiles)
 
 " Table of Contents
@@ -121,8 +122,28 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 Plug 'fatih/vim-go'
 " Elixir
 Plug 'elixir-lang/vim-elixir'
+Plug 'mhinz/vim-mix-format'
+  let g:mix_format_on_save = 1
+Plug 'vim-test/vim-test'
+  nnoremap <leader>tn :TestNearest<CR>
+  nnoremap <leader>tf :TestFile<CR>
+  nnoremap <leader>ts :TestSuite<CR>
+  nnoremap <leader>tl :TestLast<CR>
+  nnoremap <leader>tv :TestVisit<CR>
+  let test#strategy = "neoterm"
+Plug 'kassio/neoterm'
+  let g:neoterm_size='70'
+  let g:neoterm_default_mod = 'vertical'
+  let g:neoterm_autoscroll = 1
+  let g:neoterm_repl_ruby = 'pry'
+  let g:neoterm_keep_term_open = 1
+
+  nnoremap <silent> <leader>th :Tclose<CR>
+  nnoremap <silent> <leader>tl :Tclear<CR>
+  nnoremap <silent> <leader>tk :Tkill<CR>
+
 "Plug 'slashmili/alchemist.vim'
-"Plug 'mhinz/vim-mix-format'
+
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " let g:mix_format_on_save = 1
 """ Add support for ANSI colors - this has variously been necessary and caused
@@ -157,6 +178,12 @@ Plug 'vimlab/mdown.vim', { 'do': function('NpmInstallAndUpdateRemotePlugins') }
 """ Utilities #utilities
 Plug 'bogado/file-line'
 Plug 'mileszs/ack.vim'
+
+Plug 'preservim/nerdtree'
+   nnoremap <leader>s :NERDTreeFocus<Cr>
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'lambdalisue/nerdfont.vim'
+" Plug 'ryanoasis/vim-devicons'
 
 " Easily toggle quickfix and locations lists with <leader>l and <leader>q
 Plug 'milkypostman/vim-togglelist'
@@ -264,20 +291,22 @@ Plug 'kassio/neoterm'
 
 """ UI Plugins #ui-plugins
 " Molokai theme makes me cozy
-Plug 'tomasr/molokai'
-Plug 'fmoralesc/molokayo'
+"Plug 'tomasr/molokai'
+"Plug 'fmoralesc/molokayo'
 " Try out the ayu theme - https://github.com/ayu-theme/ayu-vim
-Plug 'ayu-theme/ayu-vim'
+"Plug 'ayu-theme/ayu-vim'
 " Solarized - variant with specific terminal support
-Plug 'lifepillar/vim-solarized8'
+"Plug 'lifepillar/vim-solarized8'
+"Plug 'Rigellute/shades-of-purple.vim'
+"  let g:shades_of_purple_airline = 1
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'tomasiser/vim-code-dark'
+"Plug 'tomasiser/vim-code-dark'
 Plug 'rakr/vim-one'
-  "let g:airline_theme = 'luna'
-  "let g:airline_theme = 'lucius'
   let g:airline_theme = 'one'
+  "let g:airline_theme = 'lucius'
+  "let g:airline_theme = 'one'
   let g:bufferline_echo = 0
   let g:airline_powerline_fonts=0
   let g:airline_enable_branch=1
@@ -286,6 +315,10 @@ Plug 'rakr/vim-one'
   let g:airline_paste_symbol = '∥'
   let g:airline#extensions#tabline#enabled = 0
 
+Plug 'luochen1990/rainbow'
+  let g:rainbow_active = 1
+Plug 'nathanaelkane/vim-indent-guides'
+  let g:indent_guides_enable_on_vim_startup = 1
 """ Code Navigation #code-navigation
 " fzf fuzzy finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -376,7 +409,7 @@ endif
 set background=dark
 "set background=light
 syntax enable
-"colorscheme molokai
+colorscheme one
 
 " Ayu theme config
 "let ayucolor="light"  " for light version of theme
@@ -400,6 +433,11 @@ nnoremap <silent> <cr> :nohlsearch<cr>
 " Custom split opening / closing behaviour
 map <C-N> :vsp<CR><C-P>
 map <C-C> :q<CR>
+" Remap window switching
+nmap <C-w><Left> <C-w>h
+nmap <C-w><Right> <C-w>l
+nmap <C-w><Up> <C-w>j
+nmap <C-w><Down> <C-w>k
 " Custom tab opening behaviour
 map <leader>n :tabnew .<CR><C-P>
 
@@ -557,3 +595,26 @@ vnoremap <C-l> :m '<-2<CR>gv=gv
 
 " Activate the matchit plugin
 runtime macros/matchit
+
+" Code Intelligence ---------------------------------------------- "
+
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gr <Plug>(coc-references)
+nnoremap <silent> <leader>co :<C-u]CocList outline<CR>
+
+" Show an outline of the current file.
+nnoremap <silent> <leader>co :<C-u>CocList outline<CR>
+
+" Show documentation of current symbol.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+
