@@ -89,6 +89,14 @@ set undofile
 """""""""""""" Plugins #plugins
 call plug#begin()
 
+Plug 'takac/vim-hardtime'
+  let g:hardtime_default_on = 1
+  let g:list_of_normal_keys = ["h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+  let g:list_of_visual_keys = ["h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+  let g:list_of_insert_keys = ["<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+  let g:list_of_disabled_keys = []
+  let g:hardtime_timeout = 1000
+  let g:hardtime_showmsg = 0
 """ Filetypes #filetypes
 " Polyglot loads language support on demand!
 "Plug 'sheerun/vim-polyglot'
