@@ -255,6 +255,30 @@ Plug 'michaeljsmith/vim-indent-object'
 "
 " **Note:** the `iI` mapping is mostly included simply for completeness, it is
 " effectively a synonym for `ii`.
+
+Plug 'andyl/vim-textobj-elixir'
+" ## Simple one operator-pending mapping `e`
+"
+" Elixir text objects include: 'setup_all', 'setup', 'describe', 'test',
+" 'unless', 'quote', 'case', 'cond', 'when', 'with', 'for', 'if',
+" 'defprotocol', 'defmodule', 'defmacro', 'defmacrop', 'defimpl', 'defp',
+" 'def'.
+"
+" Example:
+"
+" `#\%` is the place of your cursor.
+"
+" ```elixir
+" def hoge(yo) do
+"   if yo do
+"     IO.puts "yo!"
+"     #\%
+"   end
+"   IO.puts "everyone!"
+" end
+" ```
+"
+" Typing `dae` removes whole `if` block
 " EditorConfig support
 "Plug 'editorconfig/editorconfig-vim'
 
