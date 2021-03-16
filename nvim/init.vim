@@ -553,8 +553,8 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
   "       \ }
 
 " Easily manage tags files
-Plug 'ludovicchabant/vim-gutentags'
-  let g:gutentags_cache_dir = '~/.tags_cache'
+" Plug 'ludovicchabant/vim-gutentags'
+"   let g:gutentags_cache_dir = '~/.tags_cache'
 
 " navigate up a directory with '-' in netrw, among other things
 Plug 'tpope/vim-vinegar'
