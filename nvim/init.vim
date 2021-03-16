@@ -307,6 +307,26 @@ Plug 'vim-scripts/argtextobj.vim'
 "        function(1, (20*30)+40, <cursor here>) " sub-level function is deleted because it is a argument in terms of the outer function.
 
 
+Plug 'christoomey/vim-system-copy'
+" Usage
+" -----
+"
+" System copy provides a mapping to copy to the system clipboard using a motion
+" or visual selection. It also provides a mapping for pasting from the system
+" clipboard.
+"
+" The default mapping is `cp` for copying and `cv` for pasting, and can be followed by any motion or text
+" object. For instance:
+"
+" - `cpiw` => copy word into system clipboard
+" - `cpi'` => copy inside single quotes to system clipboard
+" - `cvi'` => paste inside single quotes from system clipboard
+"
+" In addition, `cP` is mapped to copy the current line directly.
+"
+" The sequence `cV` is mapped to paste the content of system clipboard to the
+" next line.
+
 " EditorConfig support
 "Plug 'editorconfig/editorconfig-vim'
 
