@@ -232,6 +232,29 @@ Plug 'milkypostman/vim-togglelist'
 Plug 'kana/vim-textobj-user' | Plug 'glts/vim-textobj-comment'
   " Example: Reformat a comment with `gqac` (ac is "a comment")
 
+Plug 'kana/vim-textobj-entire'
+  " vim-textobj-entire provides two text objects:
+" * `ae` targets the entire content of the current buffer.
+" * `ie` is similar to `ae`, but `ie` does not include leading and trailing empty
+"   lines.  `ie` is handy for some situations.  For example,
+"     1. Paste some text into a new buffer (`<C-w>n"*P`)
+"        -- note that the initial empty line is left as the last line.
+"     2. Edit the text (`:%s/foo/bar/g` etc)
+"     3. Then copy the resulting text to another application (`"*yie`)
+
+Plug 'michaeljsmith/vim-indent-object'
+" This plugin defines two new text objects. These are very similar - they differ
+" only in whether they include the line below the block or not.
+"
+" | Key bindings | Description                                                 |
+" | ------------ | ----------------------------------------------------------- |
+" | `<count>ai`  | **A**n **I**ndentation level and line above.                |
+" | `<count>ii`  | **I**nner **I**ndentation level (**no line above**).        |
+" | `<count>aI`  | **A**n **I**ndentation level and lines above/below.         |
+" | `<count>iI`  | **I**nner **I**ndentation level (**no lines above/below**). |
+"
+" **Note:** the `iI` mapping is mostly included simply for completeness, it is
+" effectively a synonym for `ii`.
 " EditorConfig support
 "Plug 'editorconfig/editorconfig-vim'
 
