@@ -114,26 +114,26 @@ Plug 'takac/vim-hardtime'
 Plug 'othree/html5.vim'
 Plug 'vim-scripts/html-improved-indentation'
 Plug 'pangloss/vim-javascript'
-Plug 'flowtype/vim-flow'
-Plug 'wokalski/autocomplete-flow'
+" Plug 'flowtype/vim-flow'
+" Plug 'wokalski/autocomplete-flow'
 Plug 'mattn/emmet-vim'
 " For func argument completion
 Plug 'Shougo/neocomplete.vim'
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
-  imap <C-s> <Plug>(neosnippet_expand_or_jump)
-  smap <C-s> <Plug>(neosnippet_expand_or_jump)
-  xmap <C-s> <Plug>(neosnippet_expand_target)
+" Plug 'Shougo/neosnippet'
+" Plug 'Shougo/neosnippet-snippets'
+"   imap <C-s> <Plug>(neosnippet_expand_or_jump)
+"   smap <C-s> <Plug>(neosnippet_expand_or_jump)
+"   xmap <C-s> <Plug>(neosnippet_expand_target)
 
   " SuperTab like snippets behavior.
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+" imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 "imap <expr><TAB>
 " \ pumvisible() ? "\<C-n>" :
 " \ neosnippet#expandable_or_jumpable() ?
 " \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+" smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+" \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 " Go
 Plug 'fatih/vim-go'
