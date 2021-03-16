@@ -327,6 +327,20 @@ Plug 'christoomey/vim-system-copy'
 " The sequence `cV` is mapped to paste the content of system clipboard to the
 " next line.
 
+Plug 'christoomey/vim-titlecase'
+" Usage
+" -----
+"
+" The main interface to the plugin is via the `<Plug>Titlecase` operator, by
+" default mapped to `gt`.
+"
+" The `gt` mapping will wait for a text object or motion before completing the
+" titlecase operation. This means `gti'` will titlecase inside of single quotes,
+" `gtap` will titlecase a paragraph, etc. `gt` will also work on a visual
+" selection.
+"
+" In addition, `gT` will titlecase the current line.
+
 " EditorConfig support
 "Plug 'editorconfig/editorconfig-vim'
 
