@@ -423,8 +423,8 @@ Plug 'mattn/gist-vim'
   endif
 
 " visualize your undo tree
-Plug 'sjl/gundo.vim'
-  nnoremap <F5> :GundoToggle<CR>
+Plug 'mbbill/undotree'
+  nnoremap <F5> :UndotreeToggle<CR>
 
 " org-mode
 "Plug 'jceb/vim-orgmode'
