@@ -279,6 +279,8 @@ Plug 'andyl/vim-textobj-elixir'
 " ```
 "
 " Typing `dae` removes whole `if` block
+Plug 'kana/vim-textobj-line'
+
 " EditorConfig support
 "Plug 'editorconfig/editorconfig-vim'
 
