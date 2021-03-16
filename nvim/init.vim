@@ -89,6 +89,10 @@ set undodir=./.vim-undo//
 set undodir+=~/.vim/undo//
 set undofile
 
+nnoremap <C-k> :lnext<CR>
+nnoremap <C-j> :lprev<CR>
+nnoremap <C-K> :cnext<cr>
+nnoremap <C-J> :cprev<cr>
 """""""""""""" End Basics
 
 """""""""""""" Plugins #plugins
