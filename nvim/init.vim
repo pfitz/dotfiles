@@ -36,6 +36,9 @@ set textwidth=80
 " make a copy of the file and overwrite the original one
 set backupcopy=yes
 
+set scrolloff=8
+set colorcolumn=80,120
+set paste
 """ Leader #leader
 " Use space for leader
 let g:mapleader=' '
@@ -71,6 +74,8 @@ set title
 
 " Line numbering
 set relativenumber
+" show the current line number instead of 0 in relativenumber mode
+set nu
 
 """ Undo #undo
 " undofile - This allows you to use undos after exiting and restarting
