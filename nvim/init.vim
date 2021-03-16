@@ -394,13 +394,13 @@ Plug 'tomtom/tcomment_vim'
 "  let g:test#ruby#cucumber#executable = 'spinach'
 
 " Asynchronous file linter
-Plug 'w0rp/ale'
-  " wait a bit before checking syntax in a file, if typing
-  let g:ale_lint_delay = 5000
-  " Use global eslint
-  let g:ale_javascript_eslint_use_global = 1
-  " Only use es6 for js
-  let g:ale_linters = {'javascript': ['eslint']}
+" Plug 'w0rp/ale'
+"   " wait a bit before checking syntax in a file, if typing
+"   let g:ale_lint_delay = 5000
+"   " Use global eslint
+"   let g:ale_javascript_eslint_use_global = 1
+"   " Only use es6 for js
+"   let g:ale_linters = {'javascript': ['eslint']}
 
 " git support from dat tpope
 Plug 'tpope/vim-fugitive'
