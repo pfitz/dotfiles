@@ -613,10 +613,10 @@ nnoremap <silent> <cr> :nohlsearch<cr>
 map <C-N> :vsp<CR><C-P>
 map <C-C> :q<CR>
 " Remap window switching
-nmap <C-w><Left> <C-w>h
-nmap <C-w><Right> <C-w>l
-nmap <C-w><Up> <C-w>j
-nmap <C-w><Down> <C-w>k
+" nmap <C-w><Left> <C-w>h
+" nmap <C-w><Right> <C-w>l
+" nmap <C-w><Up> <C-w>j
+" nmap <C-w><Down> <C-w>k
 " Custom tab opening behaviour
 map <leader>n :tabnew .<CR><C-P>
 
