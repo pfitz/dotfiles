@@ -753,24 +753,9 @@ nnoremap <C-Right> <C-w>l
 "nnoremap <silent> <BS> <C-w>h
   " Have to add this because hyperterm sends backspace for C-h
 
-
 " Go to last edited buffer with tab in normal mode
 nmap <tab> :b#<cr>
-" Navigate tabs with leader+h,l
-" It's hard to hit space and h/l simultaneously so increase the timeout for
-" space
-nnoremap <leader><Left> :tabprev<cr>
-nnoremap <leader><Right> :tabnext<cr>
 """ End Navigation ==================
-
-" Moving lines up and down
-" Based on this: http://vim.wikia.com/wiki/Moving_lines_up_or_dow
-nnoremap <C-c> :m .+1<CR>==
-nnoremap <C-l> :m .-2<CR>==
-inoremap <C-c> <Esc>:m .+1<CR>==gi
-inoremap <C-l> <Esc>:m .-2<CR>==gi
-vnoremap <C-c> :m '>+1<CR>gv=gv
-vnoremap <C-l> :m '<-2<CR>gv=gv
 
 " Activate the matchit plugin
 runtime macros/matchit
