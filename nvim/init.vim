@@ -569,6 +569,8 @@ Plug 'rizzatti/dash.vim'
 " Tim Popes vim-surround
 Plug 'tpope/vim-surround'
 :nmap <silent> <leader>d <Plug>DashSearch
+
+Plug 'wincent/ferret'
 call plug#end()
 
 "" Plugin configuration that has to run after plug#end
