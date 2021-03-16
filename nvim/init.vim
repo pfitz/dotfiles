@@ -200,10 +200,10 @@ Plug 'vimlab/mdown.vim', { 'do': function('NpmInstallAndUpdateRemotePlugins') }
 Plug 'bogado/file-line'
 Plug 'mileszs/ack.vim'
 
-Plug 'preservim/nerdtree'
-   nnoremap <leader>s :NERDTreeFocus<Cr>
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'lambdalisue/nerdfont.vim'
+" Plug 'preservim/nerdtree'
+"    nnoremap <leader>s :NERDTreeFocus<Cr>
+" Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'lambdalisue/nerdfont.vim'
 " Plug 'ryanoasis/vim-devicons'
 
 " Easily toggle quickfix and locations lists with <leader>l and <leader>q
