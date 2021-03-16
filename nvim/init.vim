@@ -485,7 +485,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
   let g:fzf_layout = { 'window': 'enew' }
-  nnoremap <silent> <C-P> :FZF<cr>
+  nnoremap <silent> <C-P> :GFiles<cr>
   nnoremap <silent> <leader>a :Ag<cr>
   augroup localfzf
     autocmd!
