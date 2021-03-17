@@ -76,6 +76,8 @@ set title
 set relativenumber
 " show the current line number instead of 0 in relativenumber mode
 set nu
+" automatically reload file if it was changed
+set autoread
 
 """ Undo #undo
 " undofile - This allows you to use undos after exiting and restarting
