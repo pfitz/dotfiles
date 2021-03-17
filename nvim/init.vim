@@ -373,7 +373,7 @@ Plug 'christoomey/vim-sort-motion'
 "
 " gsi( => Sort within parenthesis. (b, c, a) would become (a, b, c)
 
-Plug 'vim-scripts/ReplaceWithRegister'
+" Plug 'vim-scripts/ReplaceWithRegister'
 " USAGE
 " [count]["x]gr{motion}   Replace {motion} text with the contents of register x.
 "                         Especially when using the unnamed register, this is
