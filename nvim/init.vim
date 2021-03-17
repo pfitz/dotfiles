@@ -38,7 +38,6 @@ set backupcopy=yes
 
 set scrolloff=8
 set colorcolumn=80,120
-set paste
 """ Leader #leader
 " Use space for leader
 let g:mapleader=' '
