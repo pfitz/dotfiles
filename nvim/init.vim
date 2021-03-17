@@ -48,7 +48,7 @@ set wildmenu
 set wildmode=full
 """ omni #omni
 " enable omni syntax completion
-"set omnifunc=syntaxcomplete#Complete
+set omnifunc=syntaxcomplete#Complete
 
 """ UI Basics #ui-basics
 " turn off mouse
@@ -119,7 +119,7 @@ Plug 'pangloss/vim-javascript'
 " Plug 'wokalski/autocomplete-flow'
 Plug 'mattn/emmet-vim'
 " For func argument completion
-Plug 'Shougo/neocomplete.vim'
+" Plug 'Shougo/neocomplete.vim'
 " Plug 'Shougo/neosnippet'
 " Plug 'Shougo/neosnippet-snippets'
 "   imap <C-s> <Plug>(neosnippet_expand_or_jump)
@@ -142,6 +142,17 @@ Plug 'fatih/vim-go'
 Plug 'elixir-lang/vim-elixir'
 "Plug 'slashmili/alchemist.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  inoremap <silent><expr> <TAB>
+        \ pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ coc#refresh()
+  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+  function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+  endfunction
+
 Plug 'mhinz/vim-mix-format'
   let g:mix_format_on_save = 1
 Plug 'vim-test/vim-test'
