@@ -387,6 +387,11 @@ Plug 'stefandtw/quickfix-reflector.vim'
 "
 " You can also delete lines in the quickfix window. This way, you can first review the quickfix list, remove all entries you don't care to change, and then use `%s/foo/bar` (or anything else) on the rest.
 
+Plug 'wellle/targets.vim'
+" Usage
+" =====
+"
+" Check https://github.com/wellle/targets.vim
 
 " Line commenting
 Plug 'tomtom/tcomment_vim'
