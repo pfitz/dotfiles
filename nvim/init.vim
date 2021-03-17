@@ -379,6 +379,14 @@ Plug 'vim-scripts/ReplaceWithRegister'
 
 " Jump between quicklist, location (syntastic, etc) items with ease, among other things
 "Plug 'tpope/vim-unimpaired'
+Plug 'stefandtw/quickfix-reflector.vim'
+" Usage
+" =====
+"
+" In the quickfix window, simply edit any entry you like. Once you save the quickfix buffer, your changes will be made in the actual file an entry points to.
+"
+" You can also delete lines in the quickfix window. This way, you can first review the quickfix list, remove all entries you don't care to change, and then use `%s/foo/bar` (or anything else) on the rest.
+
 
 " Line commenting
 Plug 'tomtom/tcomment_vim'
