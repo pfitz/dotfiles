@@ -90,10 +90,17 @@ set undodir=./.vim-undo//
 set undodir+=~/.vim/undo//
 set undofile
 
+
+" makes the history a little bit greater
+set history=200
+
 nnoremap <C-k> :lnext<CR>
 nnoremap <C-j> :lprev<CR>
 nnoremap <C-K> :cnext<cr>
 nnoremap <C-J> :cprev<cr>
+
+" remap escape in insert mode
+imap uu <Esc>
 """""""""""""" End Basics
 
 """""""""""""" Plugins #plugins
@@ -161,7 +168,8 @@ Plug 'vim-test/vim-test'
   nnoremap <leader>ts :TestSuite<CR>
   nnoremap <leader>tl :TestLast<CR>
   nnoremap <leader>tv :TestVisit<CR>
-  let test#strategy = "neoterm"
+  let test#strategy = "basic"
+  let test#elixir#exunit#options = '--no-start --trace'
 Plug 'kassio/neoterm'
   let g:neoterm_size='70'
   let g:neoterm_default_mod = 'vertical'
@@ -509,21 +517,29 @@ Plug 'nathanaelkane/vim-indent-guides'
   let g:indent_guides_enable_on_vim_startup = 1
 """ Code Navigation #code-navigation
 " fzf fuzzy finder
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-  let g:fzf_layout = { 'window': 'enew' }
-  nnoremap <silent> <C-P> :GFiles<cr>
-  nnoremap <silent> <leader>a :Ag<cr>
-  augroup localfzf
-    autocmd!
-    autocmd FileType fzf :tnoremap <buffer> <C-J> <C-J>
-    autocmd FileType fzf :tnoremap <buffer> <C-K> <C-K>
-    autocmd VimEnter * command! -bang -nargs=* Ag
-      \ call fzf#vim#ag(<q-args>,
-      \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-      \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
-      \                 <bang>0)
-  augroup END
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Plug 'junegunn/fzf.vim'
+"   let g:fzf_layout = { 'window': 'enew' }
+"   nnoremap <silent> <C-P> :GFiles<cr>
+"   nnoremap <silent> <leader>a :Ag<cr>
+"   augroup localfzf
+"     autocmd!
+"     autocmd FileType fzf :tnoremap <buffer> <C-J> <C-J>
+"     autocmd FileType fzf :tnoremap <buffer> <C-K> <C-K>
+"     autocmd VimEnter * command! -bang -nargs=* Ag
+"       \ call fzf#vim#ag(<q-args>,
+"       \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+"       \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+"       \                 <bang>0)
+"   augroup END
+
+" Telescope
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
+
+
 
 " Open files where you last left them
 Plug 'dietsche/vim-lastplace'
@@ -596,6 +612,28 @@ Plug 'rizzatti/dash.vim'
 " Tim Popes vim-surround
 Plug 'tpope/vim-surround'
 :nmap <silent> <leader>d <Plug>DashSearch
+
+Plug 'junegunn/vim-peekaboo'
+" Usage
+" -----
+"
+" Peekaboo will show you the contents of the registers on the sidebar when you
+" hit `"` or `@` in normal mode or `<CTRL-R>` in insert mode. The sidebar is
+" automatically closed on subsequent key strokes.
+"
+" You can toggle fullscreen mode by pressing spacebar.
+
+Plug 'jiangmiao/auto-pairs'
+" Insert or delete brackets, parens, quotes in pair.
+
+Plug 'godlygeek/tabular'
+" Sometimes, it's useful to line up text.  Naturally, it's nicer to have the
+" computer do this for you, since aligning things by hand quickly becomes
+" unpleasant.  While there are other plugins for aligning text, the ones I've
+" tried are either impossibly difficult to understand and use, or too simplistic
+" to handle complicated tasks.  This plugin aims to make the easy things easy
+" and the hard things possible, without providing an unnecessarily obtuse
+" interface.  It's still a work in progress, and criticisms are welcome
 
 Plug 'wincent/ferret'
 call plug#end()
