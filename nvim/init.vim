@@ -388,7 +388,7 @@ Plug 'christoomey/vim-sort-motion'
 "Plug 'editorconfig/editorconfig-vim'
 
 " Jump between quicklist, location (syntastic, etc) items with ease, among other things
-"Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-unimpaired'
 Plug 'stefandtw/quickfix-reflector.vim'
 " Usage
 " =====
@@ -406,6 +406,8 @@ Plug 'wellle/targets.vim'
 " Line commenting
 Plug 'tomtom/tcomment_vim'
   " By default, `gc` will toggle comments
+Plug 'unblevable/quick-scope'
+  let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 "Plug 'janko-m/vim-test'                " Run tests with varying granularity
 "  nmap <silent> <leader>t :TestNearest<CR>
