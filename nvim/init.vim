@@ -78,6 +78,9 @@ set nu
 " automatically reload file if it was changed
 set autoread
 
+" allow non saved buffers in the background
+set hidden
+
 """ Undo #undo
 " undofile - This allows you to use undos after exiting and restarting
 " This, like swap and backups, uses .vim-undo first, then ~/.vim/undo
