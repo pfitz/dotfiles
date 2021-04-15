@@ -635,6 +635,35 @@ Plug 'godlygeek/tabular'
 " and the hard things possible, without providing an unnecessarily obtuse
 " interface.  It's still a work in progress, and criticisms are welcome
 
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+" It's called ___vim-visual-multi___ in analogy with _visual-block_, but the plugin works mostly from normal mode.
+"
+" Basic usage:
+"
+" - select words with <kbd>Ctrl-N</kbd> (like `Ctrl-d` in Sublime Text/VS Code)
+" - create cursors vertically with <kbd>Ctrl-Down</kbd>/<kbd>Ctrl-Up</kbd>
+" - select one character at a time with <kbd>Shift-Arrows</kbd>
+" - press <kbd>n</kbd>/<kbd>N</kbd> to get next/previous occurrence
+" - press <kbd>[</kbd>/<kbd>]</kbd> to select next/previous cursor
+" - press <kbd>q</kbd> to skip current and get next occurrence
+" - press <kbd>Q</kbd> to remove current cursor/selection
+" - start insert mode with <kbd>i</kbd>,<kbd>a</kbd>,<kbd>I</kbd>,<kbd>A</kbd>
+"
+" Two main modes:
+"
+" - in _cursor mode_ commands work as they would in normal mode
+" - in _extend mode_ commands work as they would in visual mode
+" - press <kbd>Tab</kbd> to switch between «cursor» and «extend» mode
+"
+" Most vim commands work as expected (motions, <kbd>r</kbd> to replace characters, <kbd>~</kbd> to change case, etc). Additionally you can:
+"
+" - run macros/ex/normal commands at cursors
+" - align cursors
+" - transpose selections
+" - add patterns with regex, or from visual mode
+"
+" And more... of course, you can enter insert mode and autocomplete will work.
+
 Plug 'wincent/ferret'
 call plug#end()
 
