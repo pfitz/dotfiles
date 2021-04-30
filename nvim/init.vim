@@ -668,6 +668,26 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 " And more... of course, you can enter insert mode and autocomplete will work.
 
 Plug 'wincent/ferret'
+
+Plug 'dbeniamine/cheat.sh-vim'
+" This is a highly configurable vim plugin to browse cheat sheet from
+" [cheat.sh](https://github.com/chubin/cheat.sh) directly from vim.
+" ### How to use it
+"
+" The easiest way to use this plugin is to use one of the following mappings :
+"
+" + `K` get answer on the word under the cursor or the selection on a pager (this
+" feature requires vim >= 7.4.1833, you can check if have the right version with :
+" `:echo has("patch-7.4.1833")`)
+" + `<leader>KK` same as `K` but works on lines or visual selection (not working
+" on neovim, because they killed interactive commands with `:!`)
+" + `<leader>KB` get the answer on a special buffer
+" + `<leader>KR` Replace your question by the answer
+" + `<leader>KP` Past the answer below your question
+" + `<leader>KC` Replay last query, toggling comments
+" + `<leader>KE` Send first error to cht.sh
+" + `<leader>C` Toggle showing comments by default see [configuration](#configuration)
+" + `<leader>KL` Replay last query
 call plug#end()
 
 "" Plugin configuration that has to run after plug#end
