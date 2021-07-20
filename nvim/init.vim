@@ -692,6 +692,8 @@ Plug 'dbeniamine/cheat.sh-vim'
 " + `<leader>KE` Send first error to cht.sh
 " + `<leader>C` Toggle showing comments by default see [configuration](#configuration)
 " + `<leader>KL` Replay last query
+Plug 'dpelle/vim-LanguageTool'
+  let g:languagetool_jar='/usr/local/Cellar/languagetool/5.3/libexec/languagetool-commandline.jar'
 call plug#end()
 
 "" Plugin configuration that has to run after plug#end
