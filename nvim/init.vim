@@ -104,7 +104,25 @@ nnoremap <C-J> :cprev<cr>
 
 " remap escape in insert mode
 imap uu <Esc>
-"""""""""""""" End Basics
+
+" yank till end of line
+nnoremap Y y$
+
+" keep cursor centered while searching
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
+
+" move text
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+inoremap <C-j> :m .+1<CR>==
+inoremap <C-k> :m .-2<CR>==
+
+nnoremap <leader>k :m .-2<CR>==
+nnoremap <leader>j :m .+1<CR>==
+""""""""""""" End Basics
 
 """""""""""""" Plugins #plugins
 call plug#begin()
@@ -694,6 +712,9 @@ Plug 'dbeniamine/cheat.sh-vim'
 " + `<leader>KL` Replay last query
 Plug 'dpelle/vim-LanguageTool'
   let g:languagetool_jar='/usr/local/Cellar/languagetool/5.3/libexec/languagetool-commandline.jar'
+Plug 'stephpy/vim-php-cs-fixer'
+  let g:php_cs_fixer_path="~/Documents/wgg/titan/titan/vendor/bin/phpcbf"
+  let g:php_cs_fixer_rules="CakePHP"
 call plug#end()
 
 "" Plugin configuration that has to run after plug#end
