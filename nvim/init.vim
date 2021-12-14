@@ -520,22 +520,23 @@ Plug 'kassio/neoterm'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 "Plug 'tomasiser/vim-code-dark'
-Plug 'rakr/vim-one'
-  let g:airline_theme = 'one'
-  "let g:airline_theme = 'lucius'
-  "let g:airline_theme = 'one'
-  let g:bufferline_echo = 0
-  let g:airline_powerline_fonts=0
-  let g:airline_enable_branch=1
-  let g:airline_enable_syntastic=1
-  let g:airline_branch_prefix = '⎇ '
-  let g:airline_paste_symbol = '∥'
-  let g:airline#extensions#tabline#enabled = 0
-
-Plug 'luochen1990/rainbow'
-  let g:rainbow_active = 1
-Plug 'nathanaelkane/vim-indent-guides'
-  let g:indent_guides_enable_on_vim_startup = 1
+" Plug 'rakr/vim-one'
+"   let g:airline_theme = 'one'
+"   "let g:airline_theme = 'lucius'
+"   "let g:airline_theme = 'one'
+"   let g:bufferline_echo = 0
+"   let g:airline_powerline_fonts=0
+"   let g:airline_enable_branch=1
+"   let g:airline_enable_syntastic=1
+"   let g:airline_branch_prefix = '⎇ '
+"   let g:airline_paste_symbol = '∥'
+"   let g:airline#extensions#tabline#enabled = 0
+"
+" Plug 'luochen1990/rainbow'
+"   let g:rainbow_active = 1
+" Plug 'nathanaelkane/vim-indent-guides'
+"   let g:indent_guides_enable_on_vim_startup = 1
+Plug 'arcticicestudio/nord-vim'
 """ Code Navigation #code-navigation
 " fzf fuzzy finder
 " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -715,6 +716,20 @@ Plug 'dpelle/vim-LanguageTool'
 Plug 'stephpy/vim-php-cs-fixer'
   let g:php_cs_fixer_path="~/Documents/wgg/titan/titan/vendor/bin/phpcbf"
   let g:php_cs_fixer_rules="CakePHP"
+
+Plug 'direnv/direnv.vim'
+
+" Harpoon
+Plug 'nvim-lua/plenary.nvim'
+Plug 'ThePrimeagen/harpoon'
+  nnoremap <leader>a :lua require("harpoon.mark").add_file()<CR>
+  nnoremap <C-e> :lua require("harpoon.ui").toggle_quick_menu()<CR>
+  nnoremap <leader>tc :lua require("harpoon.cmd-ui").toggle_quick_menu()<CR>
+
+  nnoremap <C-n> :lua require("harpoon.ui").nav_file(1)<CR>
+  nnoremap <C-r> :lua require("harpoon.ui").nav_file(2)<CR>
+  nnoremap <C-t> :lua require("harpoon.ui").nav_file(3)<CR>
+  nnoremap <C-d> :lua require("harpoon.ui").nav_file(4)<CR>
 call plug#end()
 
 "" Plugin configuration that has to run after plug#end
@@ -732,7 +747,7 @@ endif
 set background=dark
 "set background=light
 syntax enable
-colorscheme one
+colorscheme nord
 
 " Ayu theme config
 "let ayucolor="light"  " for light version of theme
