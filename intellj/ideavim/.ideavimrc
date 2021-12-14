@@ -19,7 +19,7 @@ let g:argtextobj_pairs="[:],(:),<:>"
 set showmode
 set so=5
 set incsearch
-set nu
+set number relativenumber
 
 """ Idea specific settings ------------------
 set ideajoin
