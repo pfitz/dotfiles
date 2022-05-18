@@ -16,3 +16,6 @@ echo "## nvim"
 echo "To install the nvim plugins, open up vim and type ':PlugInstall'\n"
 
 ln -sf `pwd`/tmux/.tmux.conf ~/.tmux.conf
+
+mkidr -p ~/.config/fish
+ln -sf `pwd`/fish ~/.config/fish
