@@ -729,7 +729,9 @@ Plug 'ThePrimeagen/harpoon'
   nnoremap <C-n> :lua require("harpoon.ui").nav_file(1)<CR>
   nnoremap <C-r> :lua require("harpoon.ui").nav_file(2)<CR>
   nnoremap <C-t> :lua require("harpoon.ui").nav_file(3)<CR>
-  nnoremap <C-d> :lua require("harpoon.ui").nav_file(4)<CR>
+  " nnoremap <C-d> :lua require("harpoon.ui").nav_file(4)<CR>
+
+Plug 'hashivim/vim-terraform'
 call plug#end()
 
 "" Plugin configuration that has to run after plug#end
