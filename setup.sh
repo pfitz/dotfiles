@@ -19,3 +19,6 @@ ln -sf `pwd`/tmux/.tmux.conf ~/.tmux.conf
 
 mkidr -p ~/.config/fish
 ln -sf `pwd`/fish ~/.config/fish
+
+# starship
+ln -s ~/dotfiles/starship/starship.toml ~/.config/

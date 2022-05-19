@@ -78,7 +78,7 @@ alias gst='git status'
 
 
 # starship
-#starship init fish | source
+starship init fish | source
 
 source /usr/local/Cellar/autojump/22.5.3_3/share/autojump/autojump.fish
 set -g theme_color_scheme nord
