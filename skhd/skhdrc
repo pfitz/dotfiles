@@ -151,10 +151,10 @@ ctrl - e : yabai -m space --layout bsp
 ctrl - s : yabai -m space --layout stack
 ctrl - f : yabai -m space --layout float
 
-alt - s : yabai -m window --focusw west
-alt - n : yabai -m window --focus south
-alt - r : yabai -m window --focus north
-alt - t : yabai -m window --focus east
+# alt - s : yabai -m window --focus west
+# alt - n : yabai -m window --focus south
+# alt - r : yabai -m window --focus north
+# alt - t : yabai -m window --focus east
 
 shift + alt - s: yabai -m window --swap west
 shift + alt - n: yabai -m window --swap south

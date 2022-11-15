@@ -76,6 +76,8 @@ alias gsr='git svn rebase'
 alias gss='git status -s'
 alias gst='git status'
 
+# search stuff
+bind \cs "~/dotfiles/bin/tmux-sessionizer.sh"
 
 # starship
 starship init fish | source
@@ -92,5 +94,5 @@ if test -d (brew --prefix)"/share/fish/vendor_completions.d"
     set -gx fish_complete_path $fish_complete_path (brew --prefix)/share/fish/vendor_completions.d
 end
 
-set PATH $PATH:/Users/friedrichpfitzmann/.local/bin
+set PATH $PATH:/Users/friedrichpfitzmann/.local/bin:/Users/friedrichpfitzmann/.cargo/bin
 direnv hook fish | source

@@ -732,6 +732,13 @@ Plug 'ThePrimeagen/harpoon'
   " nnoremap <C-d> :lua require("harpoon.ui").nav_file(4)<CR>
 
 Plug 'hashivim/vim-terraform'
+Plug 'neovimhaskell/haskell-vim'
+  let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+  let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+  let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+  let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+  let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+  let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
 call plug#end()
 
 "" Plugin configuration that has to run after plug#end
