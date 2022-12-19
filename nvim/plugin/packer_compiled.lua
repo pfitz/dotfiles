@@ -236,6 +236,11 @@ _G.packer_plugins = {
     path = "/Users/friedrichpfitzmann/.local/share/nvim/site/pack/packer/start/vim-easymotion",
     url = "https://github.com/easymotion/vim-easymotion"
   },
+  ["vim-fugitive"] = {
+    loaded = true,
+    path = "/Users/friedrichpfitzmann/.local/share/nvim/site/pack/packer/start/vim-fugitive",
+    url = "https://github.com/tpope/vim-fugitive"
+  },
   ["vim-indent-object"] = {
     loaded = true,
     path = "/Users/friedrichpfitzmann/.local/share/nvim/site/pack/packer/start/vim-indent-object",

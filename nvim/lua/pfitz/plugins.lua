@@ -174,6 +174,7 @@ return packer.startup(function(use)
 	--        function(1, (20*30)+40, <cursor here>) " sub-level function is deleted because it is a argument in terms of the outer function.
 
 	use("theprimeagen/harpoon")
+	use("tpope/vim-fugitive")
 	if packer_bootstrap then
 		require("packer").sync()
 	end
