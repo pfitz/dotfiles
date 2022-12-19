@@ -173,6 +173,7 @@ return packer.startup(function(use)
 	--        function(1, (20*30)+40, somefunc2(<press 'cia' here>3, 4))
 	--        function(1, (20*30)+40, <cursor here>) " sub-level function is deleted because it is a argument in terms of the outer function.
 
+	use("theprimeagen/harpoon")
 	if packer_bootstrap then
 		require("packer").sync()
 	end

@@ -42,6 +42,8 @@ keymap.set("n", "<leader>tp", ":tabp<CR>") --  go to previous tab
 
 -- Switch between open buffers
 keymap.set("n", "<tab>", ":b#<cr>")
+-- NetRw
+keymap.set("n", "<Leader>rw", vim.cmd.Ex)
 
 ----------------------
 -- Plugin Keybinds
