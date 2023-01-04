@@ -32,7 +32,7 @@ local autocmds = {
 		{
 			pattern = "*",
 			callback = function()
-				require("utils").win_close_jmp()
+				require("pfitz.utils").win_close_jmp()
 			end,
 		},
 	},
@@ -43,7 +43,7 @@ local autocmds = {
 		{
 			pattern = "*",
 			callback = function()
-				require("utils").last_pos_jmp()
+				require("pfitz.utils").last_pos_jmp()
 			end,
 		},
 	},
@@ -54,7 +54,7 @@ local autocmds = {
 		{
 			pattern = "*",
 			callback = function()
-				vim.defer_fn(require("utils").autocd, 10)
+				vim.defer_fn(require("pfitz.utils").autocd, 10)
 			end,
 		},
 	},
