@@ -1,0 +1,16 @@
+theme = "tokyonight"
+
+[editor.indent-guides]
+render = true
+character = "|"
+skip-levels = 0
+
+[editor.lsp]
+display-messages = true
+
+[editor]
+line-number = "relative"
+cursorline = true
+cursorcolumn = true
+auto-save = true
+rulers = [80, 120]                                                                                              
