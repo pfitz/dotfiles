@@ -1,0 +1,38 @@
+layout {
+    tab name="home" {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        pane
+        pane size=2 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    }
+    tab name="titan" {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        pane
+        pane size=2 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    }
+    tab name="kronos" {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        pane
+        pane size=2 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    } 
+   tab name="worker" {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        pane
+        pane size=2 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    } 
+ }
