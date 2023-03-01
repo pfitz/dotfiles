@@ -103,6 +103,8 @@ return packer.startup(function(use)
 
 	-- easy motion
 	use("easymotion/vim-easymotion")
+	-- emmet
+	use("mattn/emmet-vim")
 
 	-- -------------------------------------------------------------------------
 	-- Text objects

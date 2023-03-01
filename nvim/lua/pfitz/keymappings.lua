@@ -33,6 +33,10 @@ keymap.set("n", "<leader>sv", "<C-w>v") -- split window vertically
 keymap.set("n", "<leader>sh", "<C-w>s") -- split window horizontally
 keymap.set("n", "<leader>se", "<C-w>=") -- make split windows equal width & height
 keymap.set("n", "<leader>sx", ":close<CR>") -- close current split window
+keymap.set("n", "<leader>oo", "<C-w>h") -- focus left window
+keymap.set("n", "<leader>ss", "<C-w>l") -- focus right window
+keymap.set("n", "<leader>kk", "<C-w>j") -- focus upper window
+keymap.set("n", "<leader>bb", "<C-w>k") -- focus bottom window
 
 -- tab management
 keymap.set("n", "<leader>to", ":tabnew<CR>") -- open new tab
