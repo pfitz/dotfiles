@@ -76,6 +76,9 @@ alias gsr='git svn rebase'
 alias gss='git status -s'
 alias gst='git status'
 
+alias nvimdiff='nvim -d'
+alias vimdiff='nvim -d'
+
 # search stuff
 bind \cs "~/dotfiles/bin/tmux-sessionizer.sh"
 
