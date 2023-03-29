@@ -1,0 +1,6 @@
+require("pfitz.plugins")
+require("pfitz.general-options")
+require("pfitz.colorscheme")
+require("pfitz.keymappings")
+require("pfitz.autocomands")
+require("pfitz.utils")
