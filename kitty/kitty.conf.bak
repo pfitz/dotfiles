@@ -1,0 +1,9 @@
+font_family IosevkaTerm Nerd Font Mono Bold
+bold_font IosevkaTerm Nerd Font Mono ExtraBold
+italic_font IosevkaTerm Nerd Font Mono Bold Italic
+bold_italic_font IosevkaTerm Nerd Font Mono ExtraBold Italic
+
+
+font_size 24.0
+
+confirm_os_window_close 0
