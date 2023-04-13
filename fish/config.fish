@@ -86,7 +86,7 @@ bind \cs "~/dotfiles/bin/tmux-sessionizer.sh"
 starship init fish | source
 
 source /usr/local/Cellar/autojump/22.5.3_3/share/autojump/autojump.fish
-set -g theme_color_scheme nord
+set -g theme_color_scheme CatppuccinMocha
 
 source /usr/local/opt/asdf/libexec/asdf.fish
 if test -d (brew --prefix)"/share/fish/completions"
@@ -99,3 +99,4 @@ end
 
 set PATH $PATH:/Users/friedrichpfitzmann/.local/bin:/Users/friedrichpfitzmann/.cargo/bin
 direnv hook fish | source
+set LS_COLORS $(vivid generate catppuccin-mocha)
