@@ -168,8 +168,11 @@ return {
     opts = function(_, opts)
       -- add tsx and treesitter
       vim.list_extend(opts.ensure_installed, {
-          "tsx",
-          "typescript",
+        "elixir",
+        "heex",
+        "eex",
+        "tsx",
+        "typescript",
       })
     end,
   },
@@ -193,6 +196,35 @@ return {
       }
     end,
   },
+  -- nvim lint from https://www.lazyvim.org/extras/lang/elixir
+  {
+    "mfussenegger/nvim-lint",
+    optional = true,
+    opts = {
+      linters_by_ft = {
+        elixir = { "credo" },
+      },
+    },
+  },
+
+  -- none-ls from https://www.lazyvim.org/extras/lang/elixir
+
+  {
+    "nvimtools/none-ls.nvim",
+    optional = true,
+    opts = function(_, opts)
+      local nls = require("null-ls")
+      opts.sources = opts.sources or {}
+      vim.list_extend(opts.sources, {
+        nls.builtins.diagnostics.credo,
+      })
+    end,
+  },
+
+  -- https://www.lazyvim.org/extras/lang/elixir
+  {
+    "jfpedroza/neotest-elixir",
+  },
 
   -- use mini.starter instead of alpha
   { import = "lazyvim.plugins.extras.ui.mini-starter" },
@@ -205,6 +237,7 @@ return {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
+        "elixir-ls",
         "stylua",
         "shellcheck",
         "shfmt",
