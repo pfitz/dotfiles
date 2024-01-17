@@ -1,0 +1,260 @@
+#+title: Config
+#+tangle: yes
+
+* Table of Contents :toc:
+- [[#general-information][General information]]
+- [[#username-and-email-adress][Username and email adress]]
+- [[#fonts][Fonts]]
+- [[#theme][Theme]]
+- [[#line-numbers][Line numbers]]
+- [[#org-mode][Org-mode]]
+  - [[#file-location][File Location]]
+  - [[#org-roam][org-roam]]
+- [[#elixir-config][Elixir config]]
+  - [[#workaround-to-enable-running-credo-after-lsp][Workaround to enable running credo after lsp]]
+  - [[#configure-elixir-lsp][Configure elixir-lsp]]
+  - [[#compile-and-test-on-save][Compile and test on save]]
+  - [[#disable-popup-quitting-for-elixirs-repl][Disable popup quitting for Elixirs REPL]]
+  - [[#do-not-select-exunits-compilation-window][Do not select exunits-compilation window]]
+- [[#github-copilot][Github copilot]]
+- [[#evil-mode][evil-mode]]
+  - [[#evil-snipe][evil-snipe]]
+- [[#git-auto-commit-mode][git-auto-commit-mode]]
+
+* General information
+This is the doom emacs config org file from Friedrich Pfitzmann.
+
+To convert this file into a `config.el` one has to do the following steps:
+
+
+And don't forget to run `doom sync` after configuration changes!
+* Username and email adress
+This is taken over of the default config. I do not use it at the moment
+
+Some functionality uses this to identify you, e.g. GPG configuration, email
+clients, file templates and snippets. It is optional.
+
+#+begin_src emacs-lisp
+;; (setq user-full-name "John Doe"
+;;       user-mail-address "john@doe.com")
+#+end_src
+
+#+RESULTS:
+
+* Fonts
+Doom exposes five (optional) variables for controlling fonts in Doom:
+
+- `doom-font' -- the primary font to use
+- `doom-variable-pitch-font' -- a non-monospace font (where applicable)
+- `doom-big-font' -- used for `doom-big-font-mode'; use this for
+  presentations or streaming.
+- `doom-symbol-font' -- for symbols
+- `doom-serif-font' -- for the `fixed-pitch-serif' face
+
+See 'C-h v doom-font' for documentation and more examples of what they
+accept. For example:
+
+#+begin_src emacs-lisp :tangle yes
+(setq doom-font (font-spec :family "Fira Code" :size 18)
+     doom-variable-pitch-font (font-spec :family "Fira Sans" :size 18))
+;; (setq doom-font (font-spec :family "Fira Code" :size 18 :weight 'regular)
+;;       doom-variable-pitch-font (font-spec :family "Fira Sans" :size 18))
+#+end_src
+
+If you or Emacs can't find your font, use 'M-x describe-font' to look them
+up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
+refresh your font settings. If Emacs still can't find your font, it likely
+wasn't installed correctly. Font issues are rarely Doom issues!
+
+* Theme
+I personnally use the catppuccin mocca theme almost everywere.
+
+I followed the instructions on the [https://github.com/catppuccin/emacs#doom-emacs](Catppucin Website).
+!!! Do not forget to install the catpuccin package !!!
+
+#+begin_src emacs-lisp :tangle yes
+(setq doom-theme 'catppuccin)
+#+end_src
+
+* Line numbers
+This determines the style of line numbers in effect. If set to `nil', line
+numbers are disabled. For relative line numbers, set this to `relative'.
+
+#+begin_src emacs-lisp :tangle yes
+(setq display-line-numbers-type 'relative)
+#+end_src
+
+* Org-mode
+Of course I do use the org mode :).
+
+The following line ensures, that the config is not overwritten by the default `org` config.
+
+#+begin_src emacs-lisp :tangle yes
+(after! org
+#+end_src
+
+** File Location
+If you use `org' and don't want your org files in the default location below,
+change `org-directory'. It must be set before org loads!
+
+#+begin_src emacs-lisp :tangle yes
+(setq org-directory "~/Documents/org/")
+(setq org-agenda-files (quote ("~/Documents/org" "~/Documents/org/daily" "~/Documents/org/agendas/2024")))
+(setq org-agenda-start-with-log-mode t)
+(setq org-log-done 'time)
+(setq org-log-into-drawer t)
+
+;; config for my todo system
+(setq org-todo-keywords
+      (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+              (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE" "MEETING"))))
+
+(setq org-todo-keyword-faces
+      (quote (("TODO" :foreground "red" :weight bold)
+              ("NEXT" :foreground "blue" :weight bold)
+              ("DONE" :foreground "forest green" :weight bold)
+              ("WAITING" :foreground "orange" :weight bold)
+              ("HOLD" :foreground "magenta" :weight bold)
+              ("CANCELLED" :foreground "forest green" :weight bold)
+              ("MEETING" :foreground "forest green" :weight bold)
+              ("PHONE" :foreground "forest green" :weight bold))))
+#+end_src
+
+** org-roam
+I do use org-roam to build my second brain with a Zettelkasten method.
+
+#+begin_src emacs-lisp :tangle yes
+(use-package org-roam
+  :ensure t
+  :custom
+  (org-roam-directory (file-truename "~/Documents/org/"))
+  (org-roam-capture-templates
+   '(
+     ("d" "default" plain
+      (file "~/Documents/org/templates/default.org")
+        :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+date:%U")
+      :unnarrowed t)
+     ("M" "monthly" plain
+      (file "~/Documents/org/templates/monthly.org")
+        :if-new (file+head "%<%Y%m%d%H%M%S>-%<%Y-%m>-monthly.org" "")
+      :unnarrowed t)
+     ("D" "Scrum daily" plain
+      (file "~/Documents/org/templates/daily.org")
+      :if-new (file+head "./scrum/%<%Y>/%<%Y%m%d%H%M%S>-daily.org" "")
+      :unnarrowed t)
+     ("r" "scrum refinement" plain
+      (file "~/Documents/org/templates/refinement.org")
+      :if-new (file+head "./scrum/%<%Y>/%<%Y%m%d%H%M%S>-refinement.org" "")
+      :unnarrowed t)
+     ("R" "Scrum retro" plain
+      (file "~/Documents/org/templates/retro.org")
+      :if-new (file+head "./scrum/%<%Y>/%<%Y%m%d%H%M%S>-retro.org" "#+title: ${title}\n#+date:%U")
+      :unnarrowed t)
+     ("m" "meeting" plain
+      (file "~/Documents/org/templates/meeting.org")
+      :if-new (file+head "%<%Y%m%d%H%M%S>-meeting-${slug}.org" "")
+      :unnarrowed t)
+     ("p" "phone call" plain
+      (file "~/Documents/org/templates/phone_call.org")
+      :if-new (file+head "%<%Y%m%d%H%M%S>-phone-${slug}.org" "#+title: ${title}\n#+date:%U")
+      :unnarrowed t)
+     ("P" "Project" plain
+      (file "~/Documents/org/templates/project.org")
+      :if-new (file+head "./projects/%<%Y%m%d%H%M%S>${slug}.org" "#+title: ${title}\n#+date:%U")
+      :unnarrowed t)
+     ("c" "Collection" plain
+      (file "~/Documents/org/templates/collection.org")
+      :if-new (file+head "./collection/%<%Y%m%d%H%M%S>${slug}.org" "#+title: ${title}\n#+date:%U")
+      :unnarrowed t)
+     ))
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n g" . org-roam-graph)
+         ("C-c n i" . org-roam-node-insert)
+         ("C-c n c" . org-roam-capture)
+         ;; Dailies
+         ("C-c n j" . org-roam-dailies-capture-today))
+  :config
+  ;; If you're using a vertical completion framework, you might want a more informative completion interface
+  (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+  (org-roam-db-autosync-mode)
+  ;; If using org-roam-protocol
+  (require 'org-roam-protocol)
+  )
+)
+#+end_src
+
+#+RESULTS:
+: org-roam-dailies-capture-today
+
+* Elixir config
+** Workaround to enable running credo after lsp
+#+begin_src emacs-lisp :tangle yes
+(defvar-local my/flycheck-local-cache nil)
+(defun my/flycheck-checker-get (fn checker property)
+  (or (alist-get property (alist-get checker my/flycheck-local-cache))
+      (funcall fn checker property)))
+(advice-add 'flycheck-checker-get :around 'my/flycheck-checker-get)
+(add-hook 'lsp-managed-mode-hook
+          (lambda ()
+            (when (derived-mode-p 'elixir-mode)
+              (setq my/flycheck-local-cache '((lsp . ((next-checkers . (elixir-credo)))))))
+            ))
+#+end_src
+
+** Configure elixir-lsp
+#+begin_src emacs-lisp :tangle yes
+(setq lsp-elixir-fetch-deps nil)
+(setq lsp-elixir-suggest-specs t)
+(setq lsp-elixir-signature-after-complete t)
+(setq lsp-elixir-enable-test-lenses t)
+#+end_src
+
+** Compile and test on save
+#+begin_src emacs-lisp
+;; (setq alchemist-hooks-test-on-save t)
+;; (setq alchemist-hooks-compile-on-save t)
+#+end_src
+
+** Disable popup quitting for Elixirs REPL
+Default behaviour of doom’s treating of Alchemist’s REPL window is to quit the
+REPL when ESC or q is pressed (in normal mode). It’s quite annoying so below
+code disables this and set’s the size of REPL’s window to 30% of editor frame’s
+height.
+
+#+begin_src emacs-lisp :tangle yes
+(set-popup-rule! "^\\*Alchemist-IEx" :quit nil :size 0.3)
+#+end_src
+
+** Do not select exunits-compilation window
+#+begin_src emacs-lisp
+(setq shackle-rules '(("*exunit-compilation*" :noselect t))
+      shackle-default-rule '(:select t))
+#+end_src
+* Github copilot
+Accept completion from copilot and fallback to company
+#+begin_src emacs-lisp :tangle yes
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ("<tab>" . 'copilot-accept-completion)
+              ("TAB" . 'copilot-accept-completion)
+              ("C-TAB" . 'copilot-accept-completion-by-word)
+              ("C-<tab>" . 'copilot-accept-completion-by-word)))
+#+end_src
+* evil-mode
+** evil-snipe
+Snipe the hole buffer like in vim-sneak
+
+#+begin_src emacs-lisp :tangle yes
+(setq evil-snipe-scope 'buffer)
+#+end_src
+
+* git-auto-commit-mode
+I do push my changes to my org files automatically after every save.
+
+#+begin_src emacs-lisp :tangle yes
+(setq-default gac-automatically-push-p t)
+(setq-default gac-automatically-add-new-files-p t)
+(setq-default gac-debounce-interval 300)
+#+end_src
