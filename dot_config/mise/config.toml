@@ -1,8 +1,10 @@
 [tools]
 bun = "latest"
-elixir = "latest"
+clojure = "latest"
+elixir = "1.19.4"
 erlang = "latest"
 go = "latest"
+java = "temurin-21"
 node = "latest"
 rust = "latest"
 

@@ -1,5 +1,12 @@
-font-family = Fira Code
-font-size = 18
-background-opacity = 0.9
+# font-family = CaskaydiaCove Nerd Font
+font-family = CaskaydiaMono Nerd Font
+font-size = 20
+background-opacity = 0.85
 theme = catppuccin-mocha
+macos-option-as-alt = false
+keybind = alt+left=unbind
+keybind = alt+right=unbind
+window-decoration = false
+macos-titlebar-style = hidden
 keybind = shift+enter=text:\n
+
