@@ -3,6 +3,8 @@ if status is-interactive
     set fish_greeting (date)
 
     fish_vi_key_bindings
+    # this is important so that i can use neo2 layout with fish
+    bind -M insert \e\[5\;4\~ true
     atuin init fish | source
 
 end
@@ -209,7 +211,7 @@ set -gx ERL_AFLAGS "-kernel shell_history enabled -kernel shell_history_file_byt
 set -x CHANNEL_SERVICE_HOST localhost
 
 # Set Emacs path for Doom
-set -x EMACS "/opt/homebrew/opt/emacs-plus/bin/emacs"
+set -x EMACS /opt/homebrew/opt/emacs-plus/bin/emacs
 
 # Perplexity API Key — stored in ~/.config/fish/conf.d/secrets.fish (not tracked by git)
 # To set: echo 'set -gx PERPLEXITY_API_KEY "your-key-here"' >> ~/.config/fish/conf.d/secrets.fish
