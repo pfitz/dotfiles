@@ -1,0 +1,65 @@
+"$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
+
+[user]
+name = "Friedrich Pfitzmann"
+email = "friedrich.pfitzmann@teaminternet.com"
+
+[[--scope]]
+--when.commands = ["diff", "show"]
+[--scope.ui]
+pager = [
+    "delta",
+    "--side-by-side",
+    "--dark",
+    "--syntax-theme=Catppuccin Mocha",
+    "--line-numbers",
+    "--file-style=#cdd6f4",
+    "--file-decoration-style=#6c7086",
+    "--hunk-header-style=file line-number syntax",
+    "--hunk-header-decoration-style=#6c7086 box ul",
+    "--hunk-header-file-style=bold",
+    "--hunk-header-line-number-style=bold #a6adc8",
+    "--line-numbers-left-style=#6c7086",
+    "--line-numbers-right-style=#6c7086",
+    "--line-numbers-minus-style=bold #f38ba8",
+    "--line-numbers-plus-style=bold #a6e3a1",
+    "--line-numbers-zero-style=#6c7086",
+    "--minus-style=syntax #493447",
+    "--minus-emph-style=bold syntax #694559",
+    "--plus-style=syntax #394545",
+    "--plus-emph-style=bold syntax #4e6356",
+]
+diff-formatter = ":git"
+# Kaleidoscope for visual diffs and merges
+[merge-tools.ksdiff]
+program = "ksdiff"
+diff-args = ["--wait", "$left", "$right"]
+edit-args = ["--wait", "$left", "--no-snapshot", "$right", "--no-snapshot"]
+merge-args = ["--merge", "--output", "$output", "--base", "$base", "--", "$left", "--snapshot", "$right", "--snapshot"]
+
+[ui]
+# Use Kaleidoscope for interactive diff editing (jj split, jj squash -i)
+diff-editor = "ksdiff"
+# Use Kaleidoscope for merge conflict resolution
+merge-editor = "ksdiff"
+[remotes.origin]
+auto-track-bookmarks = '*'
+[revsets]
+log = "(trunk()..@):: | (trunk()..@)-"
+[revset-aliases]
+'user(x)' = 'author(x) | committer(x)'
+'mine()' = 'user("me@personal.domain") | user("me@domain")'
+# stack(x, n) is the set of mutable commits reachable from 'x',
+# with 'n' parents. 'n' is often useful to customize the display
+# and return set for certain operations. 'x' can be used to target
+# the set of 'roots' to traverse, e.g. @ is the current stack.
+'stack()' = 'stack(@)'
+'stack(x)' = 'stack(x, 2)'
+'stack(x, n)' = 'ancestors(reachable(x, mutable()), n)'
+'closest_pushable(to)' = 'heads(::to & mutable() & ~description(exact:"") & (~empty() | merges()))'
+[aliases]
+tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
+# Auto-resolve conflicts with mergiraf (syntax-aware merge)
+autoresolve = ["resolve", "--tool", "mergiraf"]
+[template-aliases]
+'format_short_change_id(id)' = 'id.shortest()'
