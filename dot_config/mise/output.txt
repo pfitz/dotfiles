@@ -1,0 +1,125 @@
+This file is a merged representation of a subset of the codebase, containing files not matching ignore patterns, combined into a single document by Repomix. The content has been processed where line numbers have been added.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching these patterns are excluded: **/uv.lock, **/package-lock.json, **/.env, **/Cargo.lock, **/node_modules, **/target, **/dist, **/build, **/output.txt, **/yarn.lock
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Line numbers have been added to the beginning of each line
+</notes>
+
+<additional_info>
+
+</additional_info>
+
+</file_summary>
+
+<directory_structure>
+config.toml
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="config.toml">
+ 1: [tools]
+ 2: elixir = "latest"
+ 3: erlang = "latest"
+ 4: 
+ 5: 
+ 6: [tasks."llm:generate_bundle"]
+ 7: description = 'Generate LLM bundle output file using repomix'
+ 8: # hide = true # hide this task from the lis
+ 9: run = """
+10: #!/usr/bin/env bash
+11: npx repomix --style xml --output-show-line-numbers --output output.txt --ignore **/uv.lock,**/package-lock.json,**/.env,**/Cargo.lock,**/node_modules,**/target,**/dist,**/build,**/output.txt,**/yarn.lock
+12: """
+13: 
+14: [tasks."llm:clean_bundles"]
+15: description = 'Generate LLM bundle output file using repomix'
+16: 
+17: run = """
+18: #!/usr/bin/env bash
+19: find . -name "output.txt" -print -delete
+20: """
+21: 
+22: [tasks."llm:generate_readme"]
+23: depends = ["llm:generate_bundle"]
+24: description = 'Generate README.md from repository content stored in output.txt using LLM generation'
+25: run = """
+26: #!/usr/bin/env bash
+27: cat output.txt | llm -t readme-gen > README.md
+28: """
+29: 
+30: [tasks."llm:copy_buffer_bundle"]
+31: depends = ["llm:generate_bundle"]
+32: description = 'Copy generated LLM bundle from output.txt to system clipboard for external use'
+33: run = """
+34: #!/usr/bin/env bash
+35: cat output.txt | pbcopy
+36: echo "Pushed output.txt to the copy buffer"
+37: """
+38: 
+39: [tasks."llm:generate_github_issues"]
+40: depends = ["llm:generate_bundle"]
+41: description = 'Generate GitHub issues from repository content stored in output.txt using LLM generation'
+42: run = """
+43: #!/usr/bin/env bash
+44: cat output.txt | llm -m claude-3.5-sonnet -t github-issue-gen > issues.md
+45: """
+46: 
+47: [tasks."llm:generate_code_review"]
+48: depends = ["llm:generate_bundle"]
+49: description = 'Generate code review output from repository content stored in output.txt using LLM generation'
+50: run = """
+51: #!/usr/bin/env bash
+52: cat output.txt | llm -m claude-3.5-sonnet -t code-review-gen > code-review.md
+53: """
+54: 
+55: [tasks."llm:generate_missing_tests"]
+56: depends = ["llm:generate_bundle"]
+57: description = 'Generate missing tests for code in repository content stored in output.txt using LLM generation'
+58: run = """
+59: #!/usr/bin/env bash
+60: cat output.txt | llm -m claude-3.5-sonnet -t missing-tests-gen > missing-tests.md
+61: """
+62: 
+63: [tasks."llm:generate_issue_prompts"]
+64: depends = ["llm:generate_bundle"]
+65: description = 'Generate issue prompts from repository content stored in output.txt using LLM generation'
+66: run = """
+67: #!/usr/bin/env bash
+68: cat output.txt | llm -m o3-mini -t issue-prompts-gen > issue-prompts.md
+69: """
+</file>
+
+</files>

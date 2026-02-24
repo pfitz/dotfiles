@@ -1,0 +1,111 @@
+return {
+  {
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "stevearc/dressing.nvim",
+    },
+    opts = function(_, opts)
+      -- Default configuration
+
+      opts.provider = "copilot"
+      
+      -- Migrate provider configurations to new structure
+      opts.providers = {
+        openai = {
+          extra_request_body = {
+            model = "o3-mini",
+            reasoning_effort = "high",
+            max_tokens = 4096,
+          },
+        },
+        copilot = {
+          extra_request_body = {
+            model = "claude-3.7-sonnet",
+          },
+        },
+      }
+      
+      opts.hints = {
+        provider = "openai",
+        auto_suggestions_provider = "openai",
+        enabled = true,
+      }
+
+      opts.rag_service = {
+        enabled = true,
+      }
+
+      -- opts.dual_boost = {
+      --   enabled = true,
+      --   first_provider = "openai",
+      --   second_provider = "copilot",
+      --   prompt = "Based on the two reference outputs below, generate a response that incorporates elements from both but reflects your own judgment and unique perspective. Do not provide any explanation, just give the response directly. Reference Output 1: [{{provider1_output}}], Reference Output 2: [{{provider2_output}}]",
+      --   timeout = 60000, -- Timeout in milliseconds
+      -- }
+
+      -- Move cursor planning mode to provider-specific config
+      opts.providers.copilot.enable_cursor_planning_mode = true
+
+      opts.web_search_engine = {
+        provider = "kagi",
+      }
+      --
+      -- File selector configuration
+      --- @alias FileSelectorProvider "native" | "fzf" | "mini.pick" | "snacks" | "telescope" | string
+      opts.file_selector = {
+        provider = "snacks",
+        provider_opts = {},
+      }
+
+      -- Blink.cmp integration
+      -- LSP score_offset is typically 60
+      opts.blink_cmp_sources = {
+        avante_commands = {
+          name = "avante_commands",
+          module = "blink.compat.source",
+          score_offset = 90, -- show at a higher priority than lsp
+          opts = {},
+        },
+        avante_files = {
+          name = "avante_files",
+          module = "blink.compat.source",
+          score_offset = 100, -- show at a higher priority than lsp
+          opts = {},
+        },
+        avante_mentions = {
+          name = "avante_mentions",
+          module = "blink.compat.source",
+          score_offset = 1000, -- show at a higher priority than lsp
+          opts = {},
+        },
+      }
+
+      opts.compat = {
+        "avante_commands",
+        "avante_mentions",
+        "avante_files",
+      }
+    end,
+    build = LazyVim.is_win() and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" or "make",
+  },
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    optional = true,
+    ft = function(_, ft)
+      vim.list_extend(ft, { "Avante" })
+    end,
+    opts = function(_, opts)
+      opts.file_types = vim.list_extend(opts.file_types or {}, { "Avante" })
+    end,
+  },
+  {
+    "folke/which-key.nvim",
+    optional = true,
+    opts = {
+      spec = {
+        { "<leader>a", group = "ai" },
+      },
+    },
+  },
+}
