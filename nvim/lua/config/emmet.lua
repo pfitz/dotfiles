@@ -14,6 +14,7 @@ return {
             "sass",
             "scss",
             "less",
+            "heex",
             "javascript",
             "typescript",
             "markdown",

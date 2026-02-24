@@ -55,3 +55,13 @@
 
 (package! git-auto-commit-mode
   :recipe (:host github :repo "ryuslash/git-auto-commit-mode"))
+
+(package! denote)
+
+(package! elixir-ts-mode)
+(package! heex-ts-mode)
+
+(package! claude-code
+  :recipe (:host github :repo "stevemolitor/claude-code.el"))
+
+(package! eat)

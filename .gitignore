@@ -7,3 +7,6 @@ tmux/plugins/
 # editor backup files
 *.bak
 *.backup-*
+# secrets / API keys (never commit these)
+fish/conf.d/secrets.fish
+**/secrets.fish

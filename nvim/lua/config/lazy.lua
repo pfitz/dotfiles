@@ -19,6 +19,12 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.coding.yanky" },
     { import = "lazyvim.plugins.extras.lang.elixir" },
     { import = "lazyvim.plugins.extras.test.core" },
+    { import = "lazyvim.plugins.extras.lang.yaml" },
+    { import = "lazyvim.plugins.extras.lang.tailwind" },
+    { import = "lazyvim.plugins.extras.lang.terraform" },
+    { import = "lazyvim.plugins.extras.lang.json" },
+    -- { import = "lazyvim.plugins.extras.linting.nvim-lint" },
+
     { import = "plugins" },
   },
   defaults = {
@@ -49,3 +55,5 @@ require("lazy").setup({
     },
   },
 })
+
+require("lspconfig").elixirls.setup({})
