@@ -1,0 +1,9 @@
+# tmux resurrect session files (runtime data, not config)
+tmux/resurrect/
+# tmux resurrect bad path dir
+tmux/#{env:TMUX_DIR}/
+# TPM plugins (installed by TPM, not hand-crafted)
+tmux/plugins/
+# editor backup files
+*.bak
+*.backup-*
