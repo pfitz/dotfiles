@@ -208,6 +208,9 @@ fzf --fish | source
 
 set -gx ERL_AFLAGS "-kernel shell_history enabled -kernel shell_history_file_bytes 1024000"
 
+set -gx EDITOR nvim
+set -gx VISUAL nvim
+
 set -x CHANNEL_SERVICE_HOST localhost
 
 # Set Emacs path for Doom
