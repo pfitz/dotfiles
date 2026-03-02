@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__plugin_perplexity_perplexity__perplexity_ask",
+      "WebSearch",
+      "mcp__mcp-omnisearch__web_search"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
