@@ -16,46 +16,82 @@
 (after! org
 
 (setq org-directory "~/Documents/org/")
-(setq org-agenda-files (quote ("~/Documents/org" "~/Documents/org/daily" "~/Documents/org/agendas/2024" "~/Documents/org/journal")))
+(setq org-agenda-files '("~/Documents/org/inbox.org"
+                          "~/Documents/org/gtd.org"
+                          "~/Documents/org/someday.org"))
 (setq org-log-done 'time)
 (setq org-log-into-drawer t)
 
-;; config for my todo system
+;; TODO keywords
 (setq org-todo-keywords
-      (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
-              (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE" "MEETING"))))
+      '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+        (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)")))
 
 (setq org-todo-keyword-faces
-      (quote (("TODO" :foreground "red" :weight bold)
-              ("NEXT" :foreground "blue" :weight bold)
-              ("DONE" :foreground "forest green" :weight bold)
-              ("WAITING" :foreground "orange" :weight bold)
-              ("HOLD" :foreground "magenta" :weight bold)
-              ("CANCELLED" :foreground "forest green" :weight bold)
-              ("MEETING" :foreground "forest green" :weight bold)
-              ("PHONE" :foreground "forest green" :weight bold))))
+      '(("TODO" :foreground "red" :weight bold)
+        ("NEXT" :foreground "blue" :weight bold)
+        ("DONE" :foreground "forest green" :weight bold)
+        ("WAITING" :foreground "orange" :weight bold)
+        ("HOLD" :foreground "magenta" :weight bold)
+        ("CANCELLED" :foreground "forest green" :weight bold)))
 
+;; Capture templates
 (setq org-capture-templates
-      `(
-        ("t" "Tasks / Projects")
-        ("tt" "Task" entry (file+olp "~/Documents/org/20240117083629-refile.org" "Inbox")
-         "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
-        ("ts" "Clocked Entry Subtask" entry (clock)
-         "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
-        )
-      )
+      '(("t" "Task" entry (file+headline "~/Documents/org/inbox.org" "Inbox")
+         "* TODO %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n" :empty-lines 1)
+        ("n" "Note" entry (file+headline "~/Documents/org/inbox.org" "Inbox")
+         "* %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n%a" :empty-lines 1)))
+
+;; Refile targets
+(setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
+(setq org-refile-use-outline-path 'file)
+(setq org-outline-path-complete-in-steps nil)
+
+;; Agenda settings
+(setq org-agenda-todo-ignore-scheduled 'future)
+(setq org-agenda-start-with-log-mode t)
 )
 
-(defvar-local my/flycheck-local-cache nil)
-(defun my/flycheck-checker-get (fn checker property)
-  (or (alist-get property (alist-get checker my/flycheck-local-cache))
-      (funcall fn checker property)))
-(advice-add 'flycheck-checker-get :around 'my/flycheck-checker-get)
-(add-hook 'lsp-managed-mode-hook
-          (lambda ()
-            (when (derived-mode-p 'elixir-mode)
-              (setq my/flycheck-local-cache '((lsp . ((next-checkers . (elixir-credo)))))))
-            ))
+;; org-super-agenda for grouped agenda views
+(use-package! org-super-agenda
+  :after org-agenda
+  :config
+  (org-super-agenda-mode))
+
+;; Custom dashboard view: SPC o A then d
+(after! org-agenda
+  (setq org-agenda-custom-commands
+        `(("d" "Dashboard"
+           ((agenda "" ((org-agenda-span 'day)
+                        (org-super-agenda-groups
+                         '((:name "Overdue" :deadline past)
+                           (:name "Due today" :deadline today)
+                           (:name "Scheduled today" :scheduled today)
+                           (:discard (:anything t))))))
+            (alltodo "" ((org-agenda-overriding-header "")
+                         (org-super-agenda-groups
+                          '((:name "Inbox" :file-path "inbox.org")
+                            (:name "Next Actions" :todo "NEXT")
+                            (:name "Waiting" :todo "WAITING")
+                            (:name "On Hold" :todo "HOLD")
+                            (:name "Projects" :file-path "gtd.org" :todo "TODO")
+                            (:discard (:anything t))))))))
+          ("r" "Review"
+           ((alltodo "" ((org-agenda-overriding-header "Review")
+                         (org-super-agenda-groups
+                          '((:name "Inbox (unprocessed)" :file-path "inbox.org")
+                            (:name "Stuck (no NEXT action)" :todo "TODO")
+                            (:name "Waiting on others" :todo "WAITING")
+                            (:name "Someday / Maybe" :file-path "someday.org")
+                            (:name "On Hold" :todo "HOLD")
+                            (:discard (:anything t))))))))
+          ("n" "Next Actions"
+           ((alltodo "" ((org-agenda-overriding-header "Next Actions")
+                         (org-super-agenda-groups
+                          '((:name "Next Actions" :todo "NEXT")
+                            (:discard (:anything t)))))))))))
+
+
 
 ;; Remember to check the doc strings of those variables.
 (setq denote-directory (expand-file-name "~/Documents/org/"))
@@ -83,7 +119,7 @@
 
 ;; If you use Markdown or plain text files (Org renders links as buttons
 ;; right away)
-(add-hook 'find-file-hook #'denote-link-buttonize-buffer)
+(add-hook 'find-file-hook #'denote-fontify-links-mode)
 
 ;; We use different ways to specify a path for demo purposes.
 ;; (setq denote-dired-directories
@@ -151,8 +187,6 @@
 ;; context menu, use the following and then enable
 ;; `context-menu-mode'.
 (add-hook 'context-menu-functions #'denote-context-menu)
-(add-hook 'elixir-mode-hook #'lsp!)
-(add-hook 'elixir-ts-mode-hook #'lsp!)
 
 ;; Claude Code configuration
 (use-package! claude-code

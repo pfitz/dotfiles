@@ -213,10 +213,20 @@ set -gx VISUAL nvim
 
 set -x CHANNEL_SERVICE_HOST localhost
 
-# Set Emacs path for Doom
-set -x EMACS /opt/homebrew/opt/emacs-plus/bin/emacs
+# Set Emacs path for Doom (GUI, no-native-comp build, workaround for macOS 26 libgccjit bug)
+set -x EMACS /nix/store/18gm0v6kbqhpb5vzi8znf19a4j9h6rk8-emacs-30.2/bin/emacs
+alias emacs="$EMACS"
+alias doom="~/.config/emacs/bin/doom"
 
 # Perplexity API Key — stored in ~/.config/fish/conf.d/secrets.fish (not tracked by git)
 # To set: echo 'set -gx PERPLEXITY_API_KEY "your-key-here"' >> ~/.config/fish/conf.d/secrets.fish
 alias jjfix "jj resolve --tool mergiraf; jj resolve"
 fish_add_path $HOME/.local/bin
+
+# aqua
+fish_add_path /Users/Friedrich.Pfitzmann/.local/share/aquaproj-aqua/bin
+
+# Added by LM Studio CLI (lms)
+set -gx PATH $PATH /Users/Friedrich.Pfitzmann/.lmstudio/bin
+# End of LM Studio CLI section
+

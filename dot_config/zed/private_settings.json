@@ -9,46 +9,46 @@
 {
   "terminal": {
     "toolbar": {
-      "breadcrumbs": true
+      "breadcrumbs": true,
     },
-    "copy_on_select": true
+    "copy_on_select": true,
   },
   "diagnostics": {
     "inline": {
-      "enabled": true
-    }
+      "enabled": true,
+    },
   },
   "languages": {
     "Elixir": {
       "colorize_brackets": true,
       "inlay_hints": {
-        "enabled": true
-      }
+        "enabled": true,
+      },
     },
     "Go": {
       "colorize_brackets": true,
       "inlay_hints": {
-        "enabled": true
-      }
-    }
+        "enabled": true,
+      },
+    },
   },
   "colorize_brackets": true,
   "icon_theme": {
     "mode": "system",
     "light": "Zed (Default)",
-    "dark": "Catppuccin Mocha"
+    "dark": "Catppuccin Mocha",
   },
   "disable_ai": false,
   "indent_guides": {
     "background_coloring": "indent_aware",
-    "coloring": "indent_aware"
+    "coloring": "indent_aware",
   },
   "relative_line_numbers": "enabled",
   "autosave": "on_focus_change",
   "buffer_font_family": "Source Code Pro",
   "telemetry": {
     "diagnostics": false,
-    "metrics": false
+    "metrics": false,
   },
   "vim_mode": true,
   "ui_font_size": 16,
@@ -56,6 +56,15 @@
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "Catppuccin Mocha"
-  }
+    "dark": "Catppuccin Mocha",
+  },
+  "lsp": {
+    "expert": {
+      "settings": {
+        "workspaceSymbols": {
+          "minQueryLength": 0,
+        },
+      },
+    },
+  },
 }

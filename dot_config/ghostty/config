@@ -9,4 +9,8 @@ keybind = alt+right=unbind
 window-decoration = false
 macos-titlebar-style = hidden
 keybind = shift+enter=text:\n
+# Neo 2 layout: Caps-as-Layer-4 driver emits Shift+Alt+PageUp as a prefix
+# before the actual char. Drop it so downstream apps (Claude Code, etc.)
+# don't interpret it as PageUp and reset the cursor.
+keybind = shift+alt+page_up=ignore
 

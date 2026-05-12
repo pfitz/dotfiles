@@ -58,8 +58,7 @@
 
 (package! denote)
 
-(package! elixir-ts-mode)
-(package! heex-ts-mode)
+(package! org-super-agenda)
 
 (package! claude-code
   :recipe (:host github :repo "stevemolitor/claude-code.el"))

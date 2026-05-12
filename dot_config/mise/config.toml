@@ -1,6 +1,7 @@
 [tools]
 bun = "latest"
 clojure = "latest"
+dexter = "latest"
 elixir = "1.19.4"
 erlang = "latest"
 go = "latest"
