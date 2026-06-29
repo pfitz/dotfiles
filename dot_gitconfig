@@ -1,0 +1,46 @@
+[user]
+	email = friedrich.pfitzmann@teaminternet.com
+	name = Friedrich Pfitzmann
+[core]
+  pager = delta
+[interactive]
+  diffFilter = delta --color-only
+[merge]
+  conflictStyle = zdiff3
+[alias]
+	append = town append
+	hack = town hack
+	new-pull-request = town new-pull-request
+	prepend = town prepend
+	prune-branches = town prune-branches
+	repo = town repo
+	ship = town ship
+	sync = town sync
+	delete = town delete
+	rename = town rename
+	compress = town compress
+	contribute = town contribute
+	diff-parent = town diff-parent
+	observe = town observe
+	park = town park
+	propose = town propose
+	set-parent = town set-parent
+	down = town down
+	up = town up
+[delta]
+  navigate = true  # use n and N to move between diff sections
+  dark = true      # or light = true, or omit for auto-detection
+[diff]
+	tool = Kaleidoscope
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[difftool]
+	prompt = false
+	trustExitCode = true
+[merge]
+	tool = Kaleidoscope
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
+[mergetool]
+	prompt = false

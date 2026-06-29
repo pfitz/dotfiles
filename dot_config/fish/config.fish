@@ -10,7 +10,10 @@ if status is-interactive
 end
 
 fish_add_path ~/.config/emacs/bin
-fish_add_path ~/homebrew/bin/
+# user-space homebrew (work laptop, no sudo); harmless if absent (private laptop uses /opt)
+if test -d ~/homebrew/bin
+    fish_add_path ~/homebrew/bin
+end
 
 # aliases
 alias vim='nvim-chad'
@@ -171,14 +174,27 @@ bind \cs "~/dotfiles/bin/tmux-sessionizer.sh"
 # starship
 starship init fish | source
 
-source /opt/homebrew/share/autojump/autojump.fish
+# mise — prefer user-space install (~/homebrew, work laptop); else system mise (private laptop)
+if test -x ~/homebrew/bin/mise
+    ~/homebrew/bin/mise activate fish | source
+else if type -q mise
+    mise activate fish | source
+end
+
+# autojump (`j`) — source from whichever brew prefix has it
+for ajprefix in ~/homebrew /opt/homebrew /usr/local
+    if test -f $ajprefix/share/autojump/autojump.fish
+        source $ajprefix/share/autojump/autojump.fish
+        break
+    end
+end
 set -g theme_color_scheme CatppuccinMocha
 
 if test -d (brew --prefix)"/share/fish/vendor_completions.d"
     set -gx fish_complete_path $fish_complete_path (brew --prefix)/share/fish/vendor_completions.d
 end
 
-set PATH $PATH:/Users/friedrichpfitzmann/.local/bin:/Users/friedrichpfitzmann/.cargo/bin
+fish_add_path ~/.local/bin ~/.cargo/bin
 direnv hook fish | source
 set LS_COLORS $(vivid generate catppuccin-mocha)
 
