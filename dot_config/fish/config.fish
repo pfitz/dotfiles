@@ -240,9 +240,9 @@ alias jjfix "jj resolve --tool mergiraf; jj resolve"
 fish_add_path $HOME/.local/bin
 
 # aqua
-fish_add_path /Users/Friedrich.Pfitzmann/.local/share/aquaproj-aqua/bin
+fish_add_path $HOME/.local/share/aquaproj-aqua/bin
 
 # Added by LM Studio CLI (lms)
-set -gx PATH $PATH /Users/Friedrich.Pfitzmann/.lmstudio/bin
+set -gx PATH $PATH $HOME/.lmstudio/bin
 # End of LM Studio CLI section
 
