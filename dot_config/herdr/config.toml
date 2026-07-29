@@ -1,0 +1,191 @@
+# herdr configuration — ported from ~/.config/tmux/tmux.conf
+#
+# Ported 2026-07-29 against herdr 0.7.5.
+# Reload after editing: `herdr server reload-config`, or the global menu -> "reload config".
+#
+# Anything your tmux.conf did that Herdr has no equivalent for is listed at the
+# bottom of this file under "NOT PORTED" rather than silently dropped.
+
+# Left commented so Herdr's first-run notification/integration setup still runs
+# once. Set to false after you've picked your notification settings.
+# onboarding = false
+
+
+##### Theme & colors #####
+
+[theme]
+# tmux: @catppuccin_flavor 'mocha'
+name = "catppuccin"
+
+
+##### Terminal #####
+
+[terminal]
+# Replaces the hardcoded `set-environment -g PATH ".../homebrew/bin:..."` hack.
+# "auto" starts login shells on macOS, so path_helper and your ~/homebrew
+# shell init run properly in every new pane — no manual PATH needed.
+shell_mode = "auto"
+
+# tmux default: new panes inherit the current pane's cwd.
+new_cwd = "follow"
+
+
+##### Keys #####
+
+[keys]
+# tmux: unbind C-b; set -g prefix C-e
+prefix = "ctrl+e"
+
+# tmux: bind r source-file ... (Herdr's resize_mode default was prefix+r,
+# so the two are swapped below to keep reload on prefix+r).
+reload_config = "prefix+r"
+resize_mode   = "prefix+shift+r"
+
+# WARNING — behavioral trap. Your tmux bound prefix+H/J/K/L to resize-pane.
+# In Herdr those keys are swap_pane_left/down/up/right and will MOVE panes
+# around instead of resizing them. Herdr has no direct resize-by-direction
+# binding; resizing is a mode: prefix+shift+r, then h/j/k/l, then esc.
+# Uncomment to disable the swap bindings if the collision bites you:
+# swap_pane_left  = ""
+# swap_pane_down  = ""
+# swap_pane_up    = ""
+# swap_pane_right = ""
+
+# tmux default detach is prefix+d; Herdr ships prefix+q. Both bound.
+detach = ["prefix+d", "prefix+q"]
+
+# Pane focus. Deliberately left on the prefix so bare ctrl+h/j/k/l pass
+# through untouched to nvim's own split navigation — Herdr has no is_vim
+# escape hatch like vim-tmux-navigator, so binding them directly would
+# shadow them inside the editor. This is the one intentional divergence
+# from your tmux keymap.
+focus_pane_left  = "prefix+h"
+focus_pane_down  = "prefix+j"
+focus_pane_up    = "prefix+k"
+focus_pane_right = "prefix+l"
+
+# Splits. CAREFUL: tmux and Herdr use these words to mean opposite things.
+# tmux `-v` = stacked; Herdr `vertical` = side by side (verified against
+# /docs/keyboard/, "Split right / down"). So the actions are crossed over
+# below to preserve the GEOMETRY your fingers expect:
+#
+#   prefix+v      -> stacked      (was `bind v split-window -v`)
+#   prefix+minus  -> side by side (was `bind h split-window -h`; prefix+h
+#                                  is taken by focus_pane_left above)
+split_horizontal = "prefix+v"
+split_vertical   = "prefix+minus"
+
+# tmux: unbind ^s; bind ^s select-pane -t :.+
+cycle_pane_next     = ["prefix+tab", "prefix+ctrl+s"]
+cycle_pane_previous = "prefix+shift+tab"
+
+# tmux: bind N new-session — Herdr's default already matches.
+new_workspace = "prefix+shift+n"
+
+# Workspace/session picking. Herdr folds tmux-sessionx (@sessionx-bind 'o')
+# and tmux-sessionizer (prefix+f) into one native surface, so all three keys
+# are bound to it.
+workspace_picker = ["prefix+w", "prefix+o", "prefix+f"]
+goto             = "prefix+g"
+
+# Displaced by the workspace_picker alias above.
+open_notification_target = "prefix+shift+o"
+
+# Tabs (tmux windows). prefix+p is claimed by the floating terminal below,
+# matching your tmux where @floax-bind 'p' overrode previous-window.
+new_tab      = "prefix+c"
+next_tab     = "prefix+n"
+previous_tab = "prefix+comma"
+switch_tab   = "prefix+1..9"
+rename_tab   = "prefix+shift+t"
+close_tab    = "prefix+shift+x"
+
+zoom       = "prefix+z"
+close_pane = "prefix+x"
+
+# tmux: set-window-option -g mode-keys vi. Herdr's copy mode is vi-style out
+# of the box — h/j/k/l, w/b/e, {/}, ctrl+u/ctrl+d, / and ? to search, n/N to
+# repeat, v or Space to select, y or Enter to copy, q or Esc to leave.
+copy_mode = "prefix+["
+
+# Navigate mode movement — also already h/j/k/l; listed explicitly so it
+# survives future default changes.
+navigate_pane_left  = "h"
+navigate_pane_down  = "j"
+navigate_pane_up    = "k"
+navigate_pane_right = "l"
+
+# tmux-floax replacement: @floax-bind 'p', 80% x 80%.
+# Popup is session-modal and closes when you exit the shell.
+[[keys.command]]
+key = "prefix+p"
+type = "popup"
+command = "exec \"${SHELL:-sh}\""
+description = "floating scratch terminal"
+width = "80%"
+height = "80%"
+
+
+##### UI #####
+
+[ui]
+# tmux: set -g pane-active-border-style 'fg=magenta' (and @floax-border-color).
+accent = "magenta"
+
+# tmux: set -g mouse on
+mouse_capture = true
+
+# tmux-yank equivalent — selection goes to the system clipboard.
+copy_on_select = true
+
+# tmux: set -g pane-border-style / pane-active-border-style
+pane_borders = true
+pane_gaps    = true
+
+# Closest thing to your catppuccin status-right (session + git context).
+# There is no date/time token — see NOT PORTED below.
+[ui.sidebar.spaces]
+rows = [["state_icon", "workspace"], ["branch", "git_status"]]
+
+[ui.sidebar.agents]
+rows = [["state_icon", "workspace", "tab"], ["agent"]]
+
+
+##### Session persistence #####
+
+# Replaces tmux-resurrect + tmux-continuum entirely. Herdr's server keeps
+# panes alive across client disconnects, so there is no save/restore keybind
+# to port (your prefix+S / prefix+R are unnecessary here).
+[session]
+resume_agents_on_restore = true
+
+
+##### NOT PORTED — no Herdr equivalent #####
+#
+# From tmux.conf, with no counterpart in herdr 0.7.5:
+#
+#   bind e / E  synchronize-panes on/off   — no broadcast-input feature.
+#                                            (prefix+e is edit_scrollback here.)
+#   bind Enter  command-prompt             — no command prompt; prefix+? shows
+#                                            help, prefix+s opens settings.
+#   tmux-thumbs                            — no hint-based screen copy.
+#   tmux-fzf-url                           — no URL picker.
+#   tmux-fzf                               — superseded by native pickers.
+#   @catppuccin_date_time_text             — sidebar has no clock token.
+#   base-index / pane-base-index /
+#   renumber-windows                       — Herdr does not expose tab numbering.
+#   escape-time, detach-on-destroy,
+#   allow-rename, default-terminal,
+#   terminal-overrides Tc                  — handled internally; nothing to set.
+#
+# Already dead in your tmux config (~/dotfiles/bin does not exist), so not ported:
+#   bind a  run-shell '~/dotfiles/bin/tmux-cht.sh'
+#   bind f  run-shell '~/dotfiles/bin/tmux-sessionizer.sh'
+# If you restore those scripts, add them back as [[keys.command]] blocks.
+#
+# Intentionally left at Herdr's default rather than matched:
+#   history-limit 10000  — Herdr uses advanced.scrollback_limit_bytes (10 MB
+#                          default), which is far more generous than 10k lines.
+#                          Uncomment below only if you want to shrink it.
+# [advanced]
+# scrollback_limit_bytes = 2000000
