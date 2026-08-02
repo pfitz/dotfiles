@@ -6,9 +6,8 @@
 # Anything your tmux.conf did that Herdr has no equivalent for is listed at the
 # bottom of this file under "NOT PORTED" rather than silently dropped.
 
-# Left commented so Herdr's first-run notification/integration setup still runs
-# once. Set to false after you've picked your notification settings.
-# onboarding = false
+# First-run notification/integration setup is disabled; settings already chosen.
+onboarding = false
 
 
 ##### Theme & colors #####
