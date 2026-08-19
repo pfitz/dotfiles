@@ -1,1 +1,18 @@
 README.md
+
+{{ if ne .chezmoi.os "linux" }}
+# Devcontainer-only Neovim config. Gated by ignore rather than by a template
+# that renders empty: chezmoi still creates the (empty) file in that case, and
+# an empty spec file under lua/plugins/ is loaded by LazyVim's
+# `{ import = "plugins" }` and returns nothing.
+.config/nvim/lua/plugins/no-mason.lua
+.config/nvim/lua/config/clipboard.lua
+{{ end }}
+
+{{ if ne .chezmoi.os "darwin" }}
+# macOS-only tools. Patterns are TARGET paths, not source paths — hence
+# .config/... and not dot_config/..., which would silently never match.
+.config/aerospace
+.config/skhd
+.config/yabai
+{{ end }}
