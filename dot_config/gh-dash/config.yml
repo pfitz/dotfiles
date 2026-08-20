@@ -1,0 +1,178 @@
+# gh-dash config
+#
+# Theme: Catppuccin Mocha (mauve accent), from the official port:
+#   https://github.com/catppuccin/gh-dash/blob/main/themes/mocha/catppuccin-mocha-mauve.yml
+#
+# Filter scoping: personal sections (my PRs, needs my review) stay global so
+# nothing in gymmy/Pfiss/personal repos is hidden. Sections that only make sense
+# for work are scoped with `org:teaminternet`.
+#
+# Bot PRs are excluded from every human-review section and get their own "Bumps"
+# tab, so dependabot noise never buries an actual review request.
+
+prSections:
+  # --- things waiting on me ---
+  - title: Needs My Review
+    filters: is:open review-requested:@me -author:app/dependabot -author:app/renovate sort:updated
+
+  - title: TONIC Review
+    filters: is:open org:teaminternet team-review-requested:teaminternet/tonic -author:app/dependabot -author:app/renovate sort:updated
+
+  # --- my own work ---
+  - title: My PRs
+    filters: is:open author:@me sort:updated
+
+  - title: Needs Fixing
+    filters: is:open author:@me status:failure sort:updated
+
+  - title: Ready to Merge
+    filters: is:open author:@me review:approved sort:updated
+
+  # --- ambient ---
+  - title: Involved
+    filters: is:open involves:@me -author:@me -author:app/dependabot -author:app/renovate sort:updated
+
+  - title: Bumps
+    filters: is:open org:teaminternet author:app/dependabot sort:updated
+
+issuesSections:
+  - title: Assigned
+    filters: is:open assignee:@me sort:updated
+
+  - title: Mentioned
+    filters: is:open mentions:@me sort:updated
+
+  - title: My Issues
+    filters: is:open author:@me sort:updated
+
+  - title: Involved
+    filters: is:open involves:@me -author:@me sort:updated
+
+# Notification filters are client-side and support only `is:read|unread|all|done`,
+# `reason:*` and `repo:owner/name` — there is no `org:` qualifier, so these cannot
+# be scoped to teaminternet. Multiple `reason:` values on one line OR together.
+notificationsSections:
+  - title: Unread
+    filters: is:unread
+
+  - title: Review Requested
+    filters: reason:review-requested
+
+  - title: Mentioned
+    filters: reason:mention reason:team-mention
+
+  - title: Participating
+    filters: reason:participating
+
+  - title: CI
+    filters: reason:ci-activity
+
+  - title: All
+    filters: ""
+
+repo:
+  branchesRefetchIntervalSeconds: 30
+  prsRefetchIntervalSeconds: 60
+
+defaults:
+  preview:
+    open: true
+    width: 0.45
+    height: 0.6
+    position: auto
+  prsLimit: 20
+  prApproveComment: LGTM
+  issuesLimit: 20
+  notificationsLimit: 20
+  view: prs
+  layout:
+    prs:
+      updatedAt:
+        width: 5
+      createdAt:
+        width: 5
+      repo:
+        width: 20
+      author:
+        width: 15
+      authorIcon:
+        hidden: false
+      labels:
+        width: 22
+        hidden: true
+      assignees:
+        width: 20
+        hidden: true
+      base:
+        width: 15
+        hidden: true
+      lines:
+        width: 15
+    issues:
+      updatedAt:
+        width: 5
+      createdAt:
+        width: 5
+      repo:
+        width: 15
+      creator:
+        width: 10
+      creatorIcon:
+        hidden: false
+      assignees:
+        width: 20
+        hidden: true
+  refetchIntervalMinutes: 30
+
+keybindings:
+  prs:
+    # C — review the PR in tuicr, in a fresh herdr tab.
+    # tuicr's `owner/repo#N` target form needs no local clone.
+    - key: C
+      name: review in tuicr
+      command: >-
+        herdr pane run "$(herdr tab create --label "PR-{{.PrNumber}}" --focus | jq -r .result.root_pane.pane_id)" "tuicr pr {{.RepoName}}#{{.PrNumber}}"
+
+    # T — inspect the PR's checks/tests with gh-enhance, in a fresh herdr tab.
+    # Mnemonic: Tests. https://www.gh-dash.dev/companions/enhance/dash-integration/
+    - key: T
+      name: enhance
+      command: >-
+        herdr pane run "$(herdr tab create --label "checks-{{.PrNumber}}" --focus | jq -r .result.root_pane.pane_id)" "gh enhance -R {{.RepoName}} {{.PrNumber}}"
+
+# Left empty: your local clones point at gitlab.teaminternet.de, while gh-dash
+# tracks the GitHub `teaminternet` org — so there is nothing useful to map, and
+# {{.RepoPath}} is deliberately unused by the keybindings above.
+repoPaths: {}
+
+theme:
+  colors:
+    text:
+      primary: "#cdd6f4" # text
+      secondary: "#cba6f7" # mauve (accent)
+      inverted: "#11111b" # crust
+      faint: "#bac2de" # subtext1
+      warning: "#f9e2af" # yellow
+      success: "#a6e3a1" # green
+      error: "#f38ba8" # red
+      # `actor` is absent from the official port, and its gh-dash default is an
+      # off-palette grey (#c6c6c6) — so author names are pinned to Mocha blue.
+      actor: "#89b4fa" # blue
+    background:
+      selected: "#313244" # surface0
+    border:
+      primary: "#cba6f7" # mauve (accent)
+      secondary: "#45475a" # surface1
+      faint: "#313244" # surface0
+  ui:
+    sectionsShowCount: true
+    table:
+      showSeparator: true
+      compact: false
+
+pager:
+  diff: "diffnav"
+confirmQuit: false
+showAuthorIcons: true
+smartFilteringAtLaunch: true
+includeReadNotifications: true
