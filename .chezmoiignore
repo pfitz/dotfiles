@@ -1,5 +1,12 @@
 README.md
 
+# Backup artifacts left behind by tools next to their real config. Never worth
+# tracking, and easy to sweep in by accident: `dot_config/ghostty/config.*.bak`
+# rode along in the initial `chezmoi add` and stayed committed for months.
+# The `**/` is load-bearing — a bare `*.bak` matches only the top level, so
+# .config/<tool>/<file>.bak would slip straight through.
+**/*.bak
+
 {{ if ne .chezmoi.os "linux" }}
 # Devcontainer-only Neovim config. Gated by ignore rather than by a template
 # that renders empty: chezmoi still creates the (empty) file in that case, and
