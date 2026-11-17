@@ -23,3 +23,7 @@ README.md
 .config/skhd
 .config/yabai
 {{ end }}
+
+# herdr-app writes these into every mod folder on start
+.config/herdr-app/mods/*/gpui-kit.d.ts
+.config/herdr-app/mods/*/jsconfig.json
